@@ -1,0 +1,650 @@
+/*
+    Theme name: RedArt
+    UI/UX: Designer: Malak Kheznadji
+    Front-end web developer: Malak Kheznadji
+    Back-end web developer: Fares Benmeridja
+    First color: bleu #140c4c
+    Second color: gold #e2c705
+*/
+
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+
+body {
+    box-sizing: border-box;
+}
+
+label.required::after{
+    content: ' *';
+    color: red;
+}
+
+/*__________________________________ 1)Landing page __________________________________*/
+
+/*Start navbar*/
+.navbar {margin-bottom: 20px}
+
+.navbar .container {border-bottom: 2px solid #140c4c}
+
+.part2  {padding-right: 150px}
+
+.part2 a {color: #140c4c !important}
+
+.part3 a {
+    padding: 5px;
+    color: #e2c705;
+    margin-right: 10px;
+    margin-left: 10px
+}
+
+.part3 button {
+    color:  #140c4c !important;
+    border-color: #e2c705 !important;
+    background-color: #e2c705 !important
+}
+
+.part3 button:last-child{margin-left: 20px}
+
+@media (max-width: 991px) {
+    .part3 {
+        margin-bottom:20px
+    }
+}
+/*Start Modal */
+.modal-body .form-sign-up input{margin-bottom: 16px}
+
+.window h5 {color: #140c4c}
+
+.window .btn-primary {
+    background-color: #140c4c;
+    color: #e2c705
+}
+/*End Modal */
+
+/*End navbar*/
+
+/*Start slider*/
+main
+{
+    height: 500px;
+    padding-top: 50px;
+    background-color:#ECEBF0 ;
+    border-radius: 30px
+}
+
+main .information {
+    padding: 50px;
+    margin-top: 20px
+}
+
+main .information h1 {color: #140c4c}
+
+@media (max-width: 991px) {
+    main .information h1{
+        font-size: 25px;
+    }
+}
+main .information p {
+    font-size: 13px;
+    margin: 50px 0 50px;
+    color:  #140c4c
+}
+
+main .information .down a {
+    font-size: 15px;
+    font-weight: bold;
+    color:#e2c705 !important;
+    text-transform: uppercase;
+
+}
+
+main .information a:before {
+    font-family: 'FontAwesome';
+    content: "\f138";
+    display: inline-block;
+    margin-right: 5px;
+    color: #e2c705
+}
+
+main ul {
+    list-style-type: none;
+    margin-top: 120px;
+    display: inline
+}
+
+@media (max-width: 991px) {
+    main ul {
+        margin-top: 50px;
+    }
+}
+
+@media (max-width: 767px) {
+    main ul {
+        margin-top: 120px;
+    }
+}
+main ul li a {
+    color: #140c4c;
+    margin-right: 30px;
+    display: inline;
+    font-weight: bold
+}
+
+main .images .carousel-item {margin-top: -280px}
+
+@media (max-width: 768px) {
+    main .exposition {
+        visibility: hidden;
+    }
+}
+
+main .images .carousel-control-prev span,
+main .images .carousel-control-next span {
+    background-color: #e2c705;
+    border-radius: 55px 55px 55px 55px;
+    overflow: hidden
+}
+
+main .images .carousel-item img {
+    margin-top: 200px;
+    object-fit: contain;
+}
+/*End slider*/
+
+/*Start our articles*/
+.our-articles {padding: 30px}
+
+.our-articles a {
+    display: inline-block;
+    color: #e2c705;
+    background-color: #140c4c;
+    border-color: #140c4c;
+    border-radius: 8px;
+    padding: 10px 25px;
+    text-transform: uppercase;
+}
+
+.our-articles .articles-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+.our-articles .articles-header h2 {
+    display: inline-block;
+    font-size: 50px;
+    font-weight: bold;
+    color: #140c4c
+}
+
+.our-articles .brand img {
+    transform: rotate(-90deg);
+    margin-top: 100px;
+    margin-left: -100px;
+}
+
+@media (max-width: 768px) {
+    .our-articles .brand img {
+        display: none
+    }
+
+    .our-articles .articles-header h2{
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 477px) {
+    .our-articles .articles-header a{
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 410px) {
+    .our-articles .articles-header{
+        flex-direction: column-reverse;
+    }
+    .our-articles .articles-header a,
+    .our-articles .articles-header h2{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .call-to-action .left p{
+        font-size: 25px;
+    }
+}
+
+.our-articles .row {margin-top: 50px}
+
+.our-articles .card {margin-bottom: 30px}
+
+
+.our-articles .card .card-title {
+    font-size: 25px;
+    line-height: 1.5;
+    color:#140c4c
+}
+
+.our-articles .card .card-subtitle {
+    padding-bottom: 6px;
+}
+
+.our-articles .card span {color: #e2c705}
+/*End our articles*/
+
+/*Start Choose us*/
+.choose-us .image,
+.choose-us .info {
+    padding: 0;
+}
+
+.choose-us .image img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.choose-us .info {
+    background-color: #140c4c;
+    color: #FFF;
+    padding-top: 30px;
+    padding-bottom: 0
+}
+
+.choose-us .info h2 {
+    margin-left: 33px;
+    color: #e2c705
+}
+
+.choose-us .info h5 {
+    margin-left: 33px;
+    margin-top: 40px
+}
+.choose-us .info p {
+    margin: 40px;
+    line-height: 2;
+    font-size: 15px;
+    margin-top: 20px
+}
+/*End Choose us*/
+
+/*Start categories*/
+.categories h2 {
+    font-size: 50px;
+    font-weight: bold;
+    color: #140c4c;
+    margin-bottom: 30px
+}
+.categories .card {border: none}
+
+.categories .card-title a {
+    color: #140c4c !important;
+    border-top: 2px solid #e2c705
+}
+
+.categories .carousel-control-prev {left: -140px}
+.categories .carousel-control-next {right: -140px}
+
+.categories .carousel-control-prev-icon,
+.categories .carousel-control-next-icon {
+    background-color: #e2c705
+}
+
+@media (max-width: 940px) {
+    .categories {
+        display: none
+    }
+}
+/*End categories*/
+
+/*Start Call to action*/
+.call-to-action {
+    padding: 80px 0;
+    background-color: #140c4c;
+    color: #e2c705
+}
+
+.call-to-action .left p {
+    margin: 0;
+    font-size: 50px
+}
+
+@media (max-width: 768px) {
+    .call-to-action .left p {
+        margin-bottom: 30px
+    }
+}
+.call-to-action .right {margin-top: 20px}
+
+.call-to-action .right button {
+    background-color: #140c4c;
+    color:#e2c705;
+    border: 2px solid#e2c705;
+    padding: 6px 15px 8px;
+    text-transform: uppercase;
+    font-weight:bold;
+    font-size: 25px
+}
+
+@media (max-width: 447px) {
+    .call-to-action .left p{
+        font-size: 25px;
+    }
+
+    .list-group{
+        margin: 70px 0;
+    }
+}
+/*End Call to action*/
+
+/*Start follow us*/
+.follow-us .blank {
+    width: 100%;
+    height: 22px;
+    background-color:#ECEBF0
+}
+
+.follow-us .social p {
+    display: inline-block;
+    color: #140c4c;
+    font-size: 40px
+}
+
+.follow-us .social i {
+    font-size: 30px;
+    margin-left: 20px;
+    color: #140c4c
+}
+/*End follow us*/
+
+/*Start Footer*/
+
+.footer {
+    padding: 100px 0;
+    background-color:#ECEBF0
+}
+
+.footer .site-info p {
+    line-height: 1.8;
+    color: #140c4c;
+    margin-top: 35px
+}
+
+.footer .site-info a {
+    color: #140c4c;
+    font-size: 15px;
+    font-weight: bold
+}
+
+.footer .site-info a:before {
+    font-family: 'FontAwesome';
+    content: "\f138";
+    display: inline-block;
+    margin-right: 5px;
+    color: #e2c705
+}
+
+.footer .contact h2 {
+    font-size: 22px;
+    color: #140c4c;
+    margin-bottom: 68px
+}
+
+.footer .contact ul li {margin-bottom: 22px}
+
+@media (max-width: 998px) {
+    .footer .contact h2 {
+        margin-bottom: 20px;
+        margin-top: 20px
+    }
+    .footer .contact ul li {
+        margin-bottom: 5px
+    }
+}
+
+.footer .collection-info h2  {
+    font-size: 22px;
+    color: #140c4c
+}
+
+.footer .collection-info .row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+    margin-top: 50px
+}
+
+.footer .collection-info .column {
+    flex: 25%;
+    max-width: 25%;
+    padding: 0 4px
+}
+
+.footer .collection-info .column img {
+    margin-top: 8px;
+    vertical-align: middle;
+    width: 100%
+}
+/*End Footer*/
+
+/*Start Copyright*/
+.copyright {
+    border-top: 1px solid #140c4c;
+    //padding: 20px;
+    color: #140c4c;
+    background-color: #ECEBF0;
+    padding: 0
+}
+/*End Copyright*/
+
+
+/*__________________________________ 2) Detailed Article__________________________________*/
+/*Start Detailed article*/
+.detailed-article {margin-top: 20px}
+
+.detailed-article h2 {
+    display: inline-block;
+    font-size: 50px;
+    font-weight: bold;
+    color: #140c4c;
+    margin-bottom: 20px;
+}
+
+.detailed-article .carousel-inner {margin-bottom:50px}
+
+.detailed-article .input-group{
+    width: 130px;
+    margin: 0 auto
+}
+
+.detailed-article .carousel-indicators li {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: #140c4c;
+    bottom:-50px
+}
+
+.detailed-article h3 {color: #140c4c}
+
+.detailed-article span {color: #e2c705}
+
+.detailed-article p {
+    color: #140c4c;
+    line-height: 1.8;
+    margin-top: 30px
+}
+
+.detailed-article button{
+    color: #e2c705 !important;
+    background-color: #140c4c !important;
+    margin-top: 36px
+}
+
+@media (max-width: 998px) {
+    .detailed-article button {
+        margin-bottom: 50px
+    }
+}
+/*End Detailed article*/
+
+/*__________________________________ 3) Shopping Cart__________________________________*/
+/*Start panier*/
+.shopping-cart .table a {color: #140c4c}
+
+.shopping-cart .table i {color: red}
+
+.shopping-cart .table thead {
+    background-color: #140c4c !important;
+    color:#e2c705
+}
+
+.shopping-cart .table td:nth-child(3) {font-size: 10px}
+
+.shopping-cart .mt-5, .my-5 {margin-top: 0 !important}
+
+.shopping-cart .qty .count {
+    color: #140c4c;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 0 2px
+;min-width: 35px;
+    text-align: center
+}
+
+.shopping-cart .qty .plus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    //color: white;
+    width: 20px;
+    height: 20px;
+    font: 20px/1 Arial,sans-serif;
+    text-align: center;
+    border-radius: 50%;
+    color: #e2c705;
+    background-color: #140c4c !important
+}
+
+.shopping-cart .qty .minus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    //color: white;
+    width: 20px;
+    height: 20px;
+    font: 20px/1 Arial,sans-serif;
+    text-align: center;
+    border-radius: 50%;
+    background-clip: padding-box;
+    color: #e2c705;
+    background-color: #140c4c !important
+}
+
+.shopping-cart div {text-align: center}
+
+.minus:hover{background-color: #717fe0 !important}
+
+.plus:hover{ background-color: #717fe0 !important}
+
+.shopping-cart > span{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none
+}
+
+.shopping-cart input{
+    border: 0;
+    width: 2%
+}
+
+.shopping-cart input::-webkit-outer-spin-button,
+.shopping-cart input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0
+}
+
+.shopping-cart input:disabled{background-color:white}
+
+.shopping-cart .description .heading {
+    background-color: #140c4c;
+    color: #e2c705;
+    border-radius: 0 !important
+}
+
+.shopping-cart .order-summary .heading {
+    background-color: #140c4c;
+    color: #e2c705;
+    border-radius: 0 !important;
+}
+
+.shopping-cart .order-summary li:last-child {
+    color: #140c4c;
+}
+.shopping-cart .order-summary button {
+    background-color: #140c4c;
+    color: #e2c705
+}
+/*End panier*/
+
+/*__________________________________ 4) User Profile_________________________________*/
+/*Start user profile*/
+.user-profile {
+    margin-top: 20px;
+    margin-bottom: 30px
+}
+
+.user-profile h3 {color: #140c4c}
+
+@media (max-width: 998px) {
+    .user-profile h3 {
+        margin-top: 20px
+    }
+}
+
+.user-profile .btn-primary {
+    background-color: #140c4c;
+    color: #e2c705
+}
+/*End user profile*
+
+/*__________________________________ 5) Contact-us_________________________________*/
+/* Start Contact Page */
+.contact-page {
+    font-size: large;
+}
+
+.contact-page h2{
+    font-weight: 700;
+    margin-bottom: 40px;
+    color: #140c4c;
+}
+
+.contact-page label {color:#140c4c}
+.contact-page button {
+    color: #e2c705;
+    background-color:#140c4c
+}
+/* End Contact Page*/
+
+.card-img-cover{
+    object-fit: cover;
+    height: 173px;
+}
+
+@media (max-width:940px){
+    .categories{display:block}
+    .categories .carousel-control-prev{left:0}
+    .categories .carousel-control-next{right:0}
+}

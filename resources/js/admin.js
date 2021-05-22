@@ -1,0 +1,15 @@
+require('./bootstrap');
+require('./admin/slick')
+require('./admin/wow')
+require('./admin/animsition')
+require('./admin/bootstrap-progressbar')
+require('./admin/jquery.waypoints')
+require('./admin/jquery.counterup')
+require('./admin/circle-progress')
+require('./admin/perfect-scrollbar')
+require('./admin/Chart.bundle')
+require('./admin/select2')
+require('./admin/main')
+
+require('./formWithAjax')
+require('./LinkedSelect')
