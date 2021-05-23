@@ -31,7 +31,7 @@ class ProductFactory extends Factory
             "slug"  => $this->faker->slug,
             "description" => $this->faker->realText(),
             'price' => $this->faker->numberBetween(200, 99999),
-            'quantity' => $this->faker->numberBetween(1, 100),
+            'qty_available' => $this->faker->numberBetween(1, 100),
             'online'    => $this->faker->boolean,
             'category_id' => Category::inRandomOrder()->pluck('id')->first(),
             'user_id'   => User::inRandomOrder()->pluck('id')->first()

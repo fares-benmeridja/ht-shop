@@ -19,8 +19,8 @@ class CategorySeeder extends Seeder
 
         foreach ($categories as $category)
         {
-            DB::insert("INSERT INTO categories (name, image, slug) VALUES (:name, :image, :slug)",
-                ['name' => $category->name, 'image' => $category->image, 'slug' => $category->slug]);
+            DB::insert("INSERT INTO categories (name, image, slug, icon) VALUES (:name, :image, :slug, :icon)",
+                ['name' => $category->name, 'image' => $category->image, 'slug' => $category->slug, 'icon' => $category->icon]);
         }
     }
 }

@@ -1,62 +1,58 @@
 <?php
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+
 const PATH = 'categories';
+const FILE_PATH = __DIR__.DIRECTORY_SEPARATOR.PATH.DIRECTORY_SEPARATOR;
 
 return [
     [
-        'name'  => "Men's Clothing & Shoes",
-        'image' => PATH.DIRECTORY_SEPARATOR."cat-men.jpeg",
-        'slug'  => \Illuminate\Support\Str::slug("Men's Clothing & Shoes")
+        'name'  => "Laptops",
+        'image' => Storage::disk('public')->putFile(PATH, FILE_PATH."laptop.jpg"),
+        'icon'  => "fa fa-laptop",
+        'slug'  => Str::slug('laptops')
     ],
     [
-        'name'  => "Women's Clothing & Shoes",
-        'image' => PATH.DIRECTORY_SEPARATOR."cat-women.jpeg",
-        'slug'  => \Illuminate\Support\Str::slug("Women's Clothing & Shoes")
+        'name'  => "Printers & Scanners",
+        'image' => Storage::disk('public')->putFile(PATH,  FILE_PATH."printer.jpg"),
+        "icon"  => "fa fa-print",
+        'slug'  => Str::slug('printers and scanners')
     ],
     [
-        'name'  => "Baby & Kids",
-        'image' => PATH.DIRECTORY_SEPARATOR."cat-kids.jpeg",
-        'slug'  => \Illuminate\Support\Str::slug("Baby & Kids")
+        'name'  => "Desktop Computer parts",
+        'image' => Storage::disk('public')->putFile(PATH,   FILE_PATH."desktop-parts.jpg"),
+        "icon"  => "fa fa-camera",
+        'slug'  => Str::slug('desktop computer parts')
     ],
     [
-        'name'  => "Jewelry & Accessories",
-        'image' => PATH.DIRECTORY_SEPARATOR."cat-acc.jpeg",
-        'slug'  => \Illuminate\Support\Str::slug("Jewelry & Accessories")
+        'name'  => "Computers Accessories",
+        'image' => Storage::disk('public')->putFile(PATH,   FILE_PATH."accessories.jpg"),
+        "icon"  => "fa fa-keyboard-o",
+        'slug'  => Str::slug('computers accessories')
     ],
     [
-        'name'  => "Bags & Luggage",
-        'image' => PATH.DIRECTORY_SEPARATOR."cat-bags.jpeg",
-        'slug'  => \Illuminate\Support\Str::slug("Bags & Luggage")
+        'name'  => "Network",
+        'image' => Storage::disk('public')->putFile(PATH,   FILE_PATH."network.jpg"),
+        'icon'  => 'fa fa-sitemap',
+        'slug'  => Str::slug('network')
     ],
     [
-        'name'  => "Toys",
-        'image' => PATH.DIRECTORY_SEPARATOR."cat-toys.jpeg",
-        'slug'  => \Illuminate\Support\Str::slug("Toys")
+        'name'  => "Desktop PCs",
+        'image' => Storage::disk('public')->putFile(PATH,   FILE_PATH."desktop-pcs.jpg"),
+        "icon"  => 'fa fa-desktop',
+        'slug'  => Str::slug('desktop pcs')
     ],
     [
-        'name'  => "Tools",
-        'image' => PATH.DIRECTORY_SEPARATOR."tools.jpg",
-        'slug'  => \Illuminate\Support\Str::slug("Tools")
+        'name'  => "Laptop parts",
+        'image' => Storage::disk('public')->putFile(PATH,   FILE_PATH."laptop-parts.jpg"),
+        "icon"  => "fa fa-battery-half",
+        'slug'  => Str::slug('laptop parts')
     ],
     [
-        'name'  => "Furniture",
-        'image' => PATH.DIRECTORY_SEPARATOR."furniture.jpg",
-        'slug'  => \Illuminate\Support\Str::slug("Furniture")
+        'name'  => "External storage",
+        'image' => Storage::disk('public')->putFile(PATH,   FILE_PATH."external-storage.jpg"),
+        "icon"  => "fa fa-hdd-o",
+        'slug'  => Str::slug('external storage')
     ],
-    [
-        'name'  => "Art",
-        'image' => PATH.DIRECTORY_SEPARATOR."art.png",
-        'slug'  => \Illuminate\Support\Str::slug("Art")
-    ],
-    [
-        'name'  => "Books",
-        'image' => PATH.DIRECTORY_SEPARATOR."books.jpg",
-        'slug'  => \Illuminate\Support\Str::slug("Books")
-    ],
-    [
-        'name'  => "Others",
-        'image' => PATH.DIRECTORY_SEPARATOR."other.jpg",
-        'slug'  => \Illuminate\Support\Str::slug("Others")
-    ],
-
 ];

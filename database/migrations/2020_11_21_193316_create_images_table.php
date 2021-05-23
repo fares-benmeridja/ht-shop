@@ -14,7 +14,6 @@ class CreateImagesTable extends Migration
     public function up()
     {
         Schema::create('images', function (Blueprint $table) {
-//            $table->unsignedSmallInteger('id');
             $table->string('code')->primary();
 
             $table->unsignedBigInteger('product_id')->index();

@@ -16,6 +16,8 @@ class CreateOrderProductTable extends Migration
         Schema::create('order_product', function (Blueprint $table) {
             $table->id();
             $table->unsignedSmallInteger('quantity');
+            $table->string('return_code')->unique();
+            $table->timestamp('returned_at');
 
             $table->unsignedBigInteger('product_id')->index();
             $table->foreign('product_id')

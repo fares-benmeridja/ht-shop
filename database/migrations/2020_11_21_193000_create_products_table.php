@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('slug')->unique();
             $table->longText('description');
             $table->unsignedDouble('price');
-            $table->unsignedSmallInteger('quantity')->default(1);
+            $table->unsignedSmallInteger('qty_available')->default(1);
             $table->boolean('online')->default(0);
             $table->timestamps();
 
