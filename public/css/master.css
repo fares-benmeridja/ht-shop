@@ -13947,10 +13947,7 @@ a.text-dark:focus {
 }
 
 /*
-    Theme name: RedArt
-    UI/UX: Designer: Malak Kheznadji
-    Front-end web developer: Malak Kheznadji
-    Back-end web developer: Fares Benmeridja
+    Theme name: ht-shop
     First color: bleu #140c4c
     Second color: gold #e2c705
 */
@@ -14354,6 +14351,10 @@ main .images .carousel-item img {
   background-color: #ECEBF0;
 }
 
+.social {
+  padding-top: 10px;
+}
+
 .follow-us .social p {
   display: inline-block;
   color: #140c4c;
@@ -14703,6 +14704,12 @@ main .images .carousel-item img {
 
   .categories .carousel-control-next {
     right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-brand img {
+    width: 75px;
   }
 }
 

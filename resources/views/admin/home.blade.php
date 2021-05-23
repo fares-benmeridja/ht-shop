@@ -2,6 +2,6 @@
 
 @section('content')
             <div class="text-center">
-                <img src="{{ asset('img/logo.png') }}" width ="800px" alt="">
+                <img src="{{ asset('images/logos/logo.png') }}" alt="">
             </div>
 @endsection

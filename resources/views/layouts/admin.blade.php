@@ -11,8 +11,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', config('app.name', 'RedArt'))</title>
+    <title>@yield('title', config('app.name', 'ht-shop'))</title>
 
+    <link rel="icon" href="{{ asset('images/logos/logo.png') }}">
     <link href="{{ asset('assets/font-awesome-5/css/fontawesome-all.min.css') }}" rel="stylesheet" media="all">
 
 
@@ -27,7 +28,7 @@
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="{{ route('main') }}">
-                            <img src="{{ asset('img/logo.png') }}" width ="150px" alt="">
+                            <img src="{{ asset('images/logos/logo.png') }}" width ="100" alt="">
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                         <span class="hamburger-box">

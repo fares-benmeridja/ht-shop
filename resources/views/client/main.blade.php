@@ -14,9 +14,9 @@
                         <p>No need to chase the Moon ... We can bring you all the Stars</p>
                         <div class="down"><a href="#DownToArticles">See more</a></div>
                         <ul class="list-group list-group-horizontal">
-                            <li><a href="https://www.facebook.com/RedArt.dz" target="_blanl">Facebook</a></li>
-                            <li><a href="https://instagram.com/redart_dz?igshid=dcjv9wcvvjcm" target="_blank">Instagram</a></li>
-                            <li><a href="mailto:redart_dz@hotmail.com=contact">Email</a></li>
+                            <li><a href="https://www.facebook.com/" target="_blanl">Facebook</a></li>
+                            <li><a href="https://instagram.com/" target="_blank">Instagram</a></li>
+                            <li><a href="mailto:ht-shop@mail.com=contact">Email</a></li>
                         </ul>
                     </div>
                 </div>
@@ -41,25 +41,6 @@
             <div class="articles-header">
                 <h2>Our articles</h2>
                 <a href="{{ route('products.all') }}" target="_blank">All categories</a>
-            </div>
-            <div class="row">
-                <div class="brand col-lg-3 col-md-2">
-                    <img src="{{ asset('img/logo.png') }}" width="300px" height="100px" alt="">
-                </div>
-                @foreach($products as $product)
-                <div class="col-md-3 col-lg-3">
-                    <div class="card text-center">
-                        <img class="card-img-top card-img-cover" src="{{ asset('storage'.DIRECTORY_SEPARATOR.$product->first_image) }}"  alt=""/>
-                        <div class="card-body">
-                            <h4 class="card-title">{{ $product->limited_title }}</h4>
-                            <h6 class="card-subtitle mb-2 text-muted">{{ $product->category->name }}</h6>
-                            <span>{{ $product->formated_price }}</span>
-                            <br>
-                            <a href="{{ route('products.shop', ['slug' => $product->category->slug, 'product' => $product]) }}" target="_blank">More</a>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
             </div>
         </div>
     </div>
@@ -88,48 +69,15 @@
     </div>
     <!--End Choose us-->
 
-    <!--Start categories-->
-    <div class="categories">
-        <div class="container my-4">
-            <h2>Categories</h2>
-            <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
-                <a class="carousel-control-prev" href="#multi-item-example" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#multi-item-example" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-                <ol class="carousel-indicators">
-                    <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
-                    <li data-target="#multi-item-example" data-slide-to="1"></li>
-                    <li data-target="#multi-item-example" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner" role="listbox">
-                @foreach($categories->chunk(3) as $chunk)
-                    <div class="carousel-item @if($loop->first) active @endif">
-                        <div class="row">
-                            @foreach($chunk as $category)
-                            <div class="col-md-4 @if(! $loop->first) clearfix d-none d-md-block @endif ">
-                                <div class="card mb-2">
-                                    <img class="card-img-top" src="{{ asset('storage'.DIRECTORY_SEPARATOR.$category->image) }}"
-                                         alt="Card image cap">
-                                    <div class="card-body">
-                                        <h4 class="card-title text-center"><a href="{{ route('products.category', $category->slug) }}">{{ $category->name }}</a></h4>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                @endforeach
-                </div>
-            </div>
+    <!--Start follow us-->
+    <div class="follow-us text-center">
+        <div class="social">
+            <p>Follow us on</p>
+            <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
+            <a href="https://instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a>
         </div>
     </div>
-    <!--End categories-->
-
+    <!--End follow us-->
     <!--Start Call to action -->
     <div class="call-to-action">
         <div class="container">
@@ -147,14 +95,5 @@
     </div>
     <!--End Call to action-->
 
-    <!--Start follow us-->
-    <div class="follow-us text-center">
-        <div class="blank"></div>
-        <div class="social">
-            <p>Follow us on</p>
-            <a href="https://www.facebook.com/RedArt.dz" target="_blank"><i class="fa fa-facebook"></i></a>
-            <a href="https://instagram.com/redart_dz?igshid=dcjv9wcvvjcm" target="_blank"><i class="fa fa-instagram"></i></a>
-        </div>
-    </div>
-    <!--End follow us-->
+
 @endsection

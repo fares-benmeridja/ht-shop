@@ -4,8 +4,8 @@
         <div class="row">
             <div class="col-sm-12 col-lg-6">
                 <div class="site-info">
-                    <img src="{{ asset('img/logo.png') }}" width="150px" alt="">
-                    <p>Crafty DZ is where the best Algerian Craftsmen & Artists gather to realize their Artwork and masterpieces for the purpose of promoting the vast Algerian culture linking it with the international market. therefore, providing high levels of professional products and services for all classes and destinations.
+                    <img src="{{ asset('images/logos/logo.png') }}" width="150px" alt="">
+                    <p>Ht-shop is where the best Algerian Craftsmen & Artists gather to realize their Artwork and masterpieces for the purpose of promoting the vast Algerian culture linking it with the international market. therefore, providing high levels of professional products and services for all classes and destinations.
                         The core of the idea is to able clients and partners to connect directly with their desired merchandise or service provider with no difficulty, a very short process, flawless exchange, and most importantly, a Shining Smile on both ends of your call or contact.</p>
                     <a href="{{ route('contact.create') }}" target="_blank">Team & support</a>
                 </div>
