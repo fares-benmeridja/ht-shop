@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-//        view::share('wilayas' , \App\Models\Wilaya::pluck('name', 'id'));
-//        Paginator::useBootstrap();
+        view::share('wilayas' , \App\Models\Wilaya::pluck('name', 'id'));
+        Paginator::useBootstrap();
     }
 }

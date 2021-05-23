@@ -137,6 +137,7 @@ function createwithAjax(e) {
             e.preventDefault();
             gridCheck.disabled = true;
 
+            clearAlerts()
             let data = { "online": gridCheck.checked}
             try {
                 let response;
@@ -177,3 +178,13 @@ function createwithAjax(e) {
     }
 
 })();
+
+function clearAlerts(){
+    let alerts = document.querySelectorAll('.alert')
+    const length = alerts.length
+
+    for (let i = 0; i < length; i++)
+    {
+        alerts[i].parentNode.removeChild(alerts[i])
+    }
+};

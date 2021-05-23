@@ -149,11 +149,11 @@ class ProductController extends Controller
         return redirect()->route("products.index");
     }
 
-    public function online(PublishedProductRequest $request, Product $product)
+    public function online(Request $request, Product $product)
     {
         $this->authorize('published');
 
-        if($product->quantity > 0){
+        if($product->qty_available > 0){
             $this->productRepository->online($product, $request->only('online'));
             $message = $request->online ? 'Article published.' : 'Article offline.';
 

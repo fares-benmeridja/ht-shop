@@ -54,9 +54,9 @@ class ImageFactory extends Factory
         $name = $file[$category].DIRECTORY_SEPARATOR.$this->faker->numberBetween(1,4);
 
         $content = __DIR__.DIRECTORY_SEPARATOR.self::PATH.DIRECTORY_SEPARATOR."$name.jpg";
-        $format = "y".DIRECTORY_SEPARATOR.'m'.DIRECTORY_SEPARATOR.'d';
-        $product = Product::where('category_id', Category::where('name', $category)->first('id')->id)->first(['id', 'slug']);
-        $path = Storage::disk('public')->putFile(self::PATH.DIRECTORY_SEPARATOR."$product->slug".now()->format($format), $content);
+        $format = 'y/m/d';
+        $product = Product::whereHas('category', fn($q) => $q->where('name', $category))->has('images', '<=', '4')->inRandomOrder()->first(['id', 'slug']);
+        $path = Storage::disk('public')->putFile(self::PATH.DIRECTORY_SEPARATOR.now()->format($format).DIRECTORY_SEPARATOR."$product->slug", $content);
 
         return [
             'code' => $path,

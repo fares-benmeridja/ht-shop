@@ -59,7 +59,7 @@ class Product extends Model
 
     public function scopePublished()
     {
-        return $this->whereRaw("online = 1 AND quantity > 0");
+        return $this->whereRaw("online = 1 AND qty_available > 0");
     }
 
     public function scopeLoadUser()
@@ -71,7 +71,7 @@ class Product extends Model
 
     public function getFirstImageAttribute()
     {
-        return $this->images->first()->code;
+        return $this->images->first()->code ?? null;
     }
 
     public function getFormatedPriceAttribute()

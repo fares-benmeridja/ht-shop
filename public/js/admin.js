@@ -55254,11 +55254,12 @@ function createwithAjax(e) {
               case 0:
                 e.preventDefault();
                 gridCheck.disabled = true;
+                clearAlerts();
                 data = {
                   "online": gridCheck.checked
                 };
-                _context.prev = 3;
-                _context.next = 6;
+                _context.prev = 4;
+                _context.next = 7;
                 return fetch(form.getAttribute('action'), {
                   "method": 'PUT',
                   "headers": {
@@ -55270,12 +55271,12 @@ function createwithAjax(e) {
                   "body": JSON.stringify(data)
                 });
 
-              case 6:
+              case 7:
                 response = _context.sent;
-                _context.next = 9;
+                _context.next = 10;
                 return response.json();
 
-              case 9:
+              case 10:
                 responseData = _context.sent;
 
                 // La réponse est ok, on vide le formulaire
@@ -55288,24 +55289,24 @@ function createwithAjax(e) {
                 } // La réponse n'est pas bonne (pas 200), on affiche les erreurs
                 else alert('error');
 
-                _context.next = 16;
+                _context.next = 17;
                 break;
 
-              case 13:
-                _context.prev = 13;
-                _context.t0 = _context["catch"](3);
+              case 14:
+                _context.prev = 14;
+                _context.t0 = _context["catch"](4);
                 alert('error');
 
-              case 16:
+              case 17:
                 // Dans tous les cas on permet la soumission du formulaire à nouveau
                 gridCheck.disabled = false;
 
-              case 17:
+              case 18:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[3, 13]]);
+        }, _callee, null, [[4, 14]]);
       }));
 
       return function (_x) {
@@ -55314,6 +55315,17 @@ function createwithAjax(e) {
     }());
   }
 })();
+
+function clearAlerts() {
+  var alerts = document.querySelectorAll('.alert');
+  var length = alerts.length;
+
+  for (var i = 0; i < length; i++) {
+    alerts[i].parentNode.removeChild(alerts[i]);
+  }
+}
+
+;
 
 /***/ }),
 
