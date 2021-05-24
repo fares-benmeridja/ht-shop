@@ -12,8 +12,8 @@
                         <th>Name</th>
                         <th>Phone number</th>
                         <th>Mailing address</th>
-                        <th>Zip code</th>
-                        <th>Commune</th>
+{{--                        <th>Zip code</th>--}}
+{{--                        <th>Commune</th>--}}
 {{--                        <th>Article name</th>--}}
 {{--                        <th>Quantity</th>--}}
                         <th>Created date</th>
@@ -26,8 +26,8 @@
                         <td>{{ $order->user->full_name }}</td>
                         <td>{{ $order->user->phone }}</td>
                         <td>{{ $order->address }}</td>
-                        <td>{{ $order->zip_code }}</td>
-                        <td>{{ $order->commune->name }}</td>
+{{--                        <td>{{ $order->zip_code }}</td>--}}
+{{--                        <td>{{ $order->commune->name }}</td>--}}
 {{--                        <td>Cadre</td>--}}
 {{--                        <td>3</td>--}}
                         <td>{{ $order->created_at }}</td>

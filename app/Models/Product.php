@@ -12,7 +12,7 @@ class Product extends Model
 
     const UNIT_PRICE = 'DZA';
 
-    protected $fillable = ['slug', 'user_id', 'title', 'description', 'online', 'price', 'quantity', 'category_id'];
+    protected $fillable = ['slug', 'user_id', 'title', 'description', 'online', 'price', 'qty_available', 'category_id'];
 
     /**
      * @return string
@@ -57,9 +57,9 @@ class Product extends Model
         }]);
     }
 
-    public function scopePublished()
+    public function scopePublished($q)
     {
-        return $this->whereRaw("online = 1 AND qty_available > 0");
+        return $q->whereRaw("online = 1 AND qty_available > 0");
     }
 
     public function scopeLoadUser()

@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Category;
 use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -54,9 +53,10 @@ class ImageFactory extends Factory
         $name = $file[$category].DIRECTORY_SEPARATOR.$this->faker->numberBetween(1,4);
 
         $content = __DIR__.DIRECTORY_SEPARATOR.self::PATH.DIRECTORY_SEPARATOR."$name.jpg";
+
         $format = 'y/m/d';
         $product = Product::whereHas('category', fn($q) => $q->where('name', $category))->has('images', '<=', '4')->inRandomOrder()->first(['id', 'slug']);
-        $path = Storage::disk('public')->putFile(self::PATH.DIRECTORY_SEPARATOR.now()->format($format).DIRECTORY_SEPARATOR."$product->slug", $content);
+        $path = Storage::disk('public')->putFile(self::PATH.DIRECTORY_SEPARATOR.$file[$category].DIRECTORY_SEPARATOR.now()->format($format).DIRECTORY_SEPARATOR."$product->slug", $content);
 
         return [
             'code' => $path,

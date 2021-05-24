@@ -13,7 +13,7 @@
             </div>
             <div class="container col-10">
                 <div class="message">
-                    <h6>{{ $contact->full_name }}<span class="ml-2">{{ "<$contact->email>" }}</span></h6>
+                    <h6><span class="ml-2">{{ "<$contact->email>" }}</span></h6>
                     <small>{{ $contact->created_at->format('d M Y H:i') }}<span class="ml-1">({{ $contact->created_at->diffForHumans() }})</span></small>
                     <p>{{ $contact->message }}</p>
                 </div>

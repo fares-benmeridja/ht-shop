@@ -15,7 +15,7 @@ class InvoiceController extends Controller
             abort(404);
         }
 
-        $order->load(['user', 'commune']);
+        $order->load(['user']);
         $order->loadProducts();
 
         return view('client.invoice.show', compact('order'));

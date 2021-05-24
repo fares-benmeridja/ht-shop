@@ -74,7 +74,7 @@ class ProductRepository extends ResourceRepository
         $product = parent::store($inputs);
 
         foreach ($inputs['images'] as $image){
-            $this->imageRepository->store(['product_id' => $product->id, "code" => $image]);
+            $this->imageRepository->store(['product_id' => $product->id, 'product' => $product, "code" => $image]);
         }
 
         return $product;

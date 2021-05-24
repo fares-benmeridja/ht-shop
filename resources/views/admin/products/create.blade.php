@@ -64,8 +64,8 @@
                                 <label for="quantity" class="form-control-label">Quantity</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                <input name="quantity" id="quantity" class="form-control @error('quantity') is-invalid @enderror" type="number" min="1" value="{{ old('quantity', $product->quantity ?? 1) }}">
-                                @error('quantity')
+                                <input name="qty_available" id="qty_available" class="form-control @error('qty_available') is-invalid @enderror" type="number" min="1" value="{{ old('qty_available', $product->qty_available ?? 1) }}">
+                                @error('qty_available')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>

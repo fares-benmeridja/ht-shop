@@ -11,7 +11,6 @@
             <table class="table table-data2">
                 <thead>
                 <tr>
-                    <th>name</th>
                     <th>email</th>
                     <th>Object</th>
                     <th>Message</th>
@@ -22,7 +21,6 @@
                 <tbody>
                 @foreach($contacts as $contact)
                 <tr class="tr-shadow">
-                    <td>{{ $contact->full_name }}</td>
                     <td>
                         <span class="block-email">{{ $contact->email }}</span>
                     </td>

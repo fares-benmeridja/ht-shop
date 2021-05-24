@@ -10,8 +10,8 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="information">
-                        <h1> We Shine For You</h1>
-                        <p>No need to chase the Moon ... We can bring you all the Stars</p>
+                        <h1>Build your own computer</h1>
+                        <p>Your computer in just one click</p>
                         <div class="down"><a href="#DownToArticles">See more</a></div>
                         <ul class="list-group list-group-horizontal">
                             <li><a href="https://www.facebook.com/" target="_blanl">Facebook</a></li>
@@ -68,32 +68,6 @@
         </div>
     </div>
     <!--End Choose us-->
-
-    <!--Start follow us-->
-    <div class="follow-us text-center">
-        <div class="social">
-            <p>Follow us on</p>
-            <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
-            <a href="https://instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a>
-        </div>
-    </div>
-    <!--End follow us-->
-    <!--Start Call to action -->
-    <div class="call-to-action">
-        <div class="container">
-            <div class="row">
-                <div class="left col-md-8 text-center text-md-left">
-                    <p>We Shine For You</p>
-                </div>
-                @guest
-                <div class="right col-md-4 text-center text-md-right">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signup">Sign up now</button>
-                </div>
-                @endguest
-            </div>
-        </div>
-    </div>
-    <!--End Call to action-->
 
 
 @endsection

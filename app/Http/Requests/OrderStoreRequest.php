@@ -25,23 +25,23 @@ class OrderStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'commune_id'    => ['bail', 'required', 'exists:communes,id'],
-            'daira_id'      => ['bail', 'required', 'exists:dairas,id'],
-            'wilaya_id'     => ['bail', 'required', 'exists:wilayas,id'],
+//            'commune_id'    => ['bail', 'required', 'exists:communes,id'],
+//            'daira_id'      => ['bail', 'required', 'exists:dairas,id'],
+//            'wilaya_id'     => ['bail', 'required', 'exists:wilayas,id'],
             'description'   => ['bail', 'nullable', 'max:9999'],
-            'zip_code'      => ['bail', 'required', 'integer'],
+//            'zip_code'      => ['bail', 'required', 'integer'],
             "address"       => ['bail', 'required', 'min:8', 'max:255'],
 
         ];
     }
 
-    public function attributes()
-    {
-        return [
-            'commune_id' => 'commune',
-            'daira_id'   => 'daira',
-            'wilaya_id'  => 'wilaya',
-            'zip_code'   => 'zip code'
-        ];
-    }
+//    public function attributes()
+//    {
+//        return [
+//            'commune_id' => 'commune',
+//            'daira_id'   => 'daira',
+//            'wilaya_id'  => 'wilaya',
+//            'zip_code'   => 'zip code'
+//        ];
+//    }
 }

@@ -26,7 +26,7 @@ class StoreProductRequest extends FormRequest
         return [
             "title"         => ['bail', 'required', 'string', 'min:3', 'max:100'],
             "price"         => ['bail', 'required', 'integer', 'min:0'],
-            "quantity"      => ['bail', 'required', 'integer', 'min:1', 'max:9999'],
+            "qty_available" => ['bail', 'required', 'integer', 'min:1', 'max:9999'],
             "description"   => ['bail', 'required', 'string', 'min:3', 'max:999999'],
             "category_id"   => ['bail', 'required', "exists:categories,id"],
             'images'        => ['required'],
@@ -37,7 +37,8 @@ class StoreProductRequest extends FormRequest
     public function attributes()
     {
         return [
-            'category_id' => 'category'
+            'category_id' => 'category',
+            'qty_available' => 'quantity'
         ];
     }
 }

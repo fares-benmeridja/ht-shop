@@ -33,7 +33,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::with(['user', 'commune'])->orderBy('created_at', 'DESC')->simplePaginate(self::PERPAGE);
+        $orders = Order::with('user')->orderBy('created_at', 'DESC')->simplePaginate(self::PERPAGE);
 
         return view('admin.orders.index', compact('orders'));
     }
@@ -62,7 +62,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        $order->load(['user', 'commune']);
+        $order->load(['user']);
         $order->loadProducts();
 
         return view('admin.orders.show', compact('order'));

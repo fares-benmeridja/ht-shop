@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'RedArt - Shopping Cart')
+@section('title', 'ht_shop - Shopping Cart')
 
 @section('content')
     <!--Start panier-->
@@ -70,14 +70,14 @@
                     </div>
                 </div>
                 <div class="row py-5 p-4  rounded shadow-sm">
-                    <div class="description col-lg-6">
-                        <div class="heading rounded-pill px-4 py-3 text-uppercase font-weight-bold">Description of the product</div>
-                        <div class="p-4">
-                            <p class="font-italic mb-4">Please describe the product that you want to buy (Dimensions, colors ...)</p>
-                            <textarea name="description" id="checkout-desc" cols="30" rows="2" class="form-control"></textarea>
-                        </div>
-                    </div>
-                    <div class="order-summary col-lg-6">
+{{--                    <div class="description col-lg-6">--}}
+{{--                        <div class="heading rounded-pill px-4 py-3 text-uppercase font-weight-bold">Description of the product</div>--}}
+{{--                        <div class="p-4">--}}
+{{--                            <p class="font-italic mb-4">Please describe the product that you want to buy (Dimensions, colors ...)</p>--}}
+{{--                            <textarea name="description" id="checkout-desc" cols="30" rows="2" class="form-control"></textarea>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+                    <div class="order-summary col-lg">
                         <div class="heading rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
                         <div class="p-4">
                             <ul class="list-unstyled mb-4">
@@ -112,33 +112,6 @@
                                 <div class="form-group col-md-12">
                                     <label class="required" for="address">Mailing address</label>
                                     <input type="text" name="address" class="form-control" id="address" placeholder="Cité 124 logements">
-                                </div>
-                                <div class="form-group col-md">
-                                    <label class="required" for="wilaya_id">Wilaya</label>
-                                    <select class="form-control linked-select" name="wilaya_id" id="wilaya_id" data-target="#daira_id" data-source="/dairas/id">
-                                        <option value="0" selected>Choose...</option>
-                                        @foreach($wilayas as $key => $wilaya)
-                                            <option value="{{ $key }}" {{ old('wilaya_id') == $key ? "selected" : '' }}>{{ "($key) $wilaya" }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group col-md" style="{{ old('daira_id') ?? "display: none" }}">
-                                    <label class="required" for="daira_id">Daira</label>
-                                    <select class="form-control linked-select" name="daira_id" id="daira_id" data-target="#commune_id" data-source="/communes/id">
-                                        <option value="0" selected>Choose...</option>
-
-                                    </select>
-                                </div>
-                                <div class="form-group col-md" style="{{ old('commune_id') ?? "display: none" }}">
-                                    <label class="required" for="commune_id">Commune</label>
-                                    <select class="form-control" name="commune_id" id="commune_id">
-                                        <option value="0" selected>Choose...</option>
-
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label class="required" for="zip_code">Zip Code</label>
-                                    <input type="text" name="zip_code" class="form-control" id="zip_code" placeholder="16000">
                                 </div>
                             </div>
                         <button class="btn btn-lg btn-primary btn-block" type="submit">Confirm</button>

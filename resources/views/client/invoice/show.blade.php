@@ -1,8 +1,7 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="utf-8">
-{{--    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>--}}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
     <title>invoice</title>
 
@@ -12,19 +11,18 @@
 <body>
 <header>
     <div id="logo">
-        <img src="{{ asset('img/logo.png') }}" alt="logo">
+        <img src="{{ asset('images/logos/logo.png') }}" alt="logo">
     </div>
-    <h1>FACTURE</h1>
+    <h1>Invoice</h1>
     <div class="columns">
         <p id="project">
             <span>Client</span>{{ $order->user->full_name }}<br>
-            <span>Wilaya</span>{{ $order->commune->wilaya }}<br>
-            <span>Numéro</span>{{ $order->user->phone }}<br>
-            <span>Adresse</span>{{ $order->address }}<br>
-            <span>Email</span> <a href="mailto:malak.kheznadji7@gmail.com">{{ $order->email }}</a><br>
+            <span>Phone</span>{{ $order->user->phone }}<br>
+            <span>Address</span>{{ $order->address }}<br>
+            <span>Email</span>{{ $order->user->email }}<br>
             <span>Date</span>{{ $order->created_at->format('d M Y') }}<br>
         </p>
-        <p id="company">RedArt<br>+213 782 20 66 52<br><a href="{{ "mailto:".env('EMAIL') }}">{{ env('EMAIL') }}</a><br>
+        <p id="company">ht-shop<br>+213 782 20 66 52<br><a>{{ env('EMAIL') }}</a><br>
     </div>
 
 </header>
@@ -34,10 +32,10 @@
         <tr>
             <th class="id">#</th>
             <th class="article">Article</th>
-            <th class="unit">Catégorie</th>
-            <th class="qty">Prix unitaire</th>
-            <th>Quantité</th>
-            <th>Total</th>
+            <th class="unit">Category</th>
+            <th class="qty">Unit price</th>
+            <th>Quantity</th>
+            <th>Amount</th>
         </tr>
         </thead>
         <tbody>
@@ -61,18 +59,15 @@
 
         @endforeach
         <tr>
-            <td colspan="4" class="grand total">Grand total</td>
+            <td colspan="4" class="grand total">Total</td>
             <td class="grand total" colspan="2">{{ number_format($grandtotal, 0, ',', ' ')." DZA" }}</td>
         </tr>
         </tbody>
     </table>
 </main>
-    <button onclick="window.print()" class="btn btn-primary"><i class="fa fa-print" style="margin-right: 8px"></i>Imprimer</button>
+    <button onclick="window.print()" class="btn btn-primary"><i class="fa fa-print" style="margin-right: 8px"></i>Print</button>
 <footer>
     <div>
-        <a href="https://www.facebook.com/RedArt.dz" target="_blank"><i class="fa fa-facebook"> RedArt</i></a>
-        <a href="https://instagram.com/redart_dz?igshid=dcjv9wcvvjcm" target="_blank"><i class="fa fa-instagram"> redart_dz
-            </i></a>
         <a><i class="fa fa-whatsapp"> +213 782 20 66 52</i></a>
     </div>
 </footer>

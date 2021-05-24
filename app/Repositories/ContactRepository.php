@@ -16,8 +16,6 @@ class ContactRepository extends ResourceRepository
     public function store(array $inputs)
     {
         if(auth()->check()){
-            $inputs['first_name'] = auth()->user()->first_name;
-            $inputs['last_name'] = auth()->user()->last_name;
             $inputs['email'] = auth()->user()->email;
         }
 

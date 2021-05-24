@@ -24,8 +24,6 @@ class ContactStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => ['bail', 'sometimes', 'required', 'string','min:3', 'max:90'],
-            'last_name' => ['bail', 'sometimes', 'required', 'string','min:3', 'max:90'],
             'email' => ['bail', 'sometimes', 'required', 'email','min:3', 'max:90'],
             'object' => ['bail', 'required', 'min:3', 'max:150'],
             "message" => ['bail', 'required', 'min:5', "max:10000"]

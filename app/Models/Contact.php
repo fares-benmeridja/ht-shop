@@ -10,12 +10,8 @@ class Contact extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['first_name', 'last_name', 'email', 'object', 'message'];
+    protected $fillable = ['email', 'object', 'message'];
 
-    public function getFullNameAttribute()
-    {
-        return "$this->first_name $this->last_name";
-    }
 
     public function getShortMessageAttribute()
     {
