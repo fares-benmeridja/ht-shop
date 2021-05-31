@@ -22,10 +22,23 @@ class Product extends Model
         return 'slug';
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships methods
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
+
     public function orders()
     {
         return $this->belongsToMany(Order::class)
             ->withPivot('quantity');
+    }
+
+    public function compatibles()
+    {
+        return $this->belongsToMany(Product::class, 'pc_configs', 'compatible_with', 'product_id');
     }
 
     public function category()
@@ -43,6 +56,14 @@ class Product extends Model
         return $this->belongsTo(User::class);
     }
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
     public function scopeLoadCategory()
     {
         return $this->load(['category' => function($query){
@@ -68,6 +89,20 @@ class Product extends Model
             $q->select('id', 'first_name', 'last_name');
         }]);
     }
+
+    public function scopeLoadCompatibles()
+    {
+        return $this->load('compatibles');
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Geters
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
 
     public function getFirstImageAttribute()
     {

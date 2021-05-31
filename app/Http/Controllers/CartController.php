@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ProductReleaser;
 use App\helpers\Helpers;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Event;
 
 class CartController extends Controller
 {
@@ -20,16 +22,6 @@ class CartController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param Product $product
@@ -37,7 +29,7 @@ class CartController extends Controller
      */
     public function store(Product $product)
     {
-        $duplicata = Cart::search(function ($cartItem) use($product){
+        $duplicata = Cart::search(function ($cartItem) use ($product){
             return $cartItem->id === $product->id;
         })->isNotEmpty();
 
@@ -57,37 +49,17 @@ class CartController extends Controller
                 'cat_slug'  => $product->category->slug,
                 'product_slug' => $product->slug,
                 'title'     => $product->title,
-                "qty_dispo" => $product->quantity,
+                "qty_dispo" => $product->qty_available,
                 "product_id" => $product->id
             ]);
+
+//        Event::dispatch(new ProductReleaser($cart));
 
         session()->flash('success', 'Article added in shopping cart successfuly.');
 
         return request()->ajax()
             ? response()->json(['route' => route('products.shop', ['slug' => $product->category->slug, 'product' => $product])])
             : redirect()->route('products.shop', ['slug' => $product->category->slug, 'product' => $product]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -118,7 +90,9 @@ class CartController extends Controller
             Cart::update($rowId, $cart->qty - 1);
         }
 
-            $cart = Cart::get($rowId);
+        $cart = Cart::get($rowId);
+        Event::dispatch(new ProductReleaser($cart));
+
         return response()->json([
             'max' => $cart->options->qty_dispo,
             'message' => "Cart quantity updated.",

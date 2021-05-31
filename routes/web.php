@@ -28,7 +28,7 @@ Route::get('/communes/{id}', [\App\Http\Controllers\CommuneController::class, 'g
 Auth::routes(['reset' => false]);
 
 Route::get('/all-categories', [App\Http\Controllers\ProductController::class, 'all'])->name('products.all');
-Route::get('/category/{category}', [App\Http\Controllers\ProductController::class, 'categories'])->name('products.category');
+Route::get('/category/{category}', [App\Http\Controllers\ProductController::class, 'category'])->name('products.category');
 Route::get('/category/{slug}/product/{product}', [App\Http\Controllers\ProductController::class, 'shop'])->name('products.shop');
 
 Route::middleware('auth')->group(function(){

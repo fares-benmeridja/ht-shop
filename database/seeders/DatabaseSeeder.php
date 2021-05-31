@@ -13,17 +13,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-//
-//        $this->call([
+
+        $this->call([
 //            WilayaSeeder::class,
 //            DairaSeeder::class,
 //            CommuneSeeder::class,
 //            RoleSeeder::class,
 //            CategorySeeder::class,
-//        ]);
+//            PcConfigSeeder::class
+        ]);
 //
 //        \App\Models\User::factory(10)->create();
 //        \App\Models\Product::factory(100)->create();
-        \App\Models\Image::factory(400)->create();
+//        \App\Models\Image::factory(900)->create();
     }
 }

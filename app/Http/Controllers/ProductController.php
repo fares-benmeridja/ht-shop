@@ -172,7 +172,7 @@ class ProductController extends Controller
 
     public function all()
     {
-        $products = Product::orderBy('created_at', 'DESC')->published()->simplePaginate(self::CATEGORY_PERPAGE);
+        $products = Product::whereBetween('category_id', [1,8])->orderBy('created_at', 'DESC')->published()->simplePaginate(self::CATEGORY_PERPAGE);
         $products->load('category');
         $products->load("images");
         $title = "All catégories";
@@ -181,7 +181,7 @@ class ProductController extends Controller
     }
 
 
-    public function categories(Category $category)
+    public function category(Category $category)
     {
         $products = Product::where('category_id', $category->id)
             ->published()

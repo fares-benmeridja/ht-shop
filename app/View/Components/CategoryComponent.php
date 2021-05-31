@@ -24,7 +24,7 @@ class CategoryComponent extends Component
      */
     public function render()
     {
-        $categories = Category::orderBy('name')->get(['slug', 'name', 'icon']);
+        $categories = Category::whereBetween('id', [1,8])->orderBy('name')->get(['slug', 'name', 'icon']);
         return view('components.category-component', compact('categories'));
     }
 }

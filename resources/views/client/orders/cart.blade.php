@@ -32,6 +32,7 @@
                                 </thead>
                                 <tbody>
                                 @foreach(Cart::content() as $cart)
+
                                 <tr class="js-cart-tr">
                                     <th scope="row" class="border-0">
                                         <div class="p-2">
