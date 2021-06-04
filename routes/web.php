@@ -31,6 +31,8 @@ Route::get('/all-categories', [App\Http\Controllers\ProductController::class, 'a
 Route::get('/category/{category}', [App\Http\Controllers\ProductController::class, 'category'])->name('products.category');
 Route::get('/category/{slug}/product/{product}', [App\Http\Controllers\ProductController::class, 'shop'])->name('products.shop');
 
+Route::get('pc-configurator', [\App\Http\Controllers\PcConfigController::class, 'index'])->name('pc-config.index');
+
 Route::middleware('auth')->group(function(){
 
     Route::get('/thankyou/{order}', \App\Http\Controllers\ThanksController::class)->name('thankyou');

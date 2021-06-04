@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'RedArt - Contact us!')
+@section('title', 'Ht-shop - Contact us!')
 
 @section('content')
     <!--Start Contact Page-->

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class Product extends Model
@@ -71,9 +72,9 @@ class Product extends Model
         }]);
     }
 
-    public function scopeWithCategory()
+    public function scopeWithCategory($q)
     {
-        return $this->with(['category' => function($query){
+        return $q->with(['category' => function($query){
             $query->select(['name', 'slug', 'id']);
         }]);
     }
@@ -93,6 +94,22 @@ class Product extends Model
     public function scopeLoadCompatibles()
     {
         return $this->load('compatibles');
+    }
+
+    public function scopeConfig($q)
+    {
+        return $q->whereIn('category_id', [
+                DB::table('categories')->where('name', 'Processor')->pluck('id')->first(),
+                DB::table('categories')->where('name', 'Graphic card')->pluck('id')->first(),
+                DB::table('categories')->where('name', 'RAM')->pluck('id')->first(),
+                DB::table('categories')->where('name', 'Motherboard')->pluck('id')->first(),
+                DB::table('categories')->where('name', 'Power supply unit')->pluck('id')->first(),
+                DB::table('categories')->where('name', 'SSD')->pluck('id')->first(),
+                DB::table('categories')->where('name', 'HDD')->pluck('id')->first(),
+                DB::table('categories')->where('name', 'Boitier')->pluck('id')->first(),
+                DB::table('categories')->where('name', 'Network card')->pluck('id')->first(),
+            ]
+        );
     }
 
 
