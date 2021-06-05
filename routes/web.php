@@ -32,6 +32,7 @@ Route::get('/category/{category}', [App\Http\Controllers\ProductController::clas
 Route::get('/category/{slug}/product/{product}', [App\Http\Controllers\ProductController::class, 'shop'])->name('products.shop');
 
 Route::get('pc-configurator', [\App\Http\Controllers\PcConfigController::class, 'index'])->name('pc-config.index');
+Route::get('product/{id}', [\App\Http\Controllers\PcConfigController::class, 'getJson'])->name('pc-config.getjson');
 
 Route::middleware('auth')->group(function(){
 
@@ -49,7 +50,7 @@ Route::middleware('auth')->group(function(){
     Route::put('/profil/password/{user}', [\App\Http\Controllers\ProfilController::class, 'updatePass'])->name('profil.updatePass');
 });
 
-Route::middleware(['auth', 'admin'])->group(function (){
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function (){
     Route::resource('/contacts', \App\Http\Controllers\ContactController::class)->only(['index', 'show','destroy']);
     Route::resource('/admins', \App\Http\Controllers\AdminManagerController::class);
     Route::get('/dashboard', \App\Http\Controllers\DashController::class)->name('dashboard');

@@ -23,17 +23,36 @@ class PcConfigRepository extends ResourceRepository
      */
     public function all() :\Illuminate\Support\Collection
     {
-        $combine = collect(['CPUs', 'GPUs', 'RAMs', 'MBs', 'PSUs', 'SSDs', 'HDDs', 'Boitiers', 'NetCs']);
-
-        $products = Product::config()->withCategory()->published()->limit(200)->get();
+        $products = Product::config()->withCategory()->published()->limit(200)->get(['id', 'title', 'slug', 'price', 'category_id']);
 
         $chunks = $products->chunkWhile(function ($value, $key, $chunk){
             return $value->category->name === $chunk->last()->category->name;
         });
 
-        return $combine->combine($chunks);
+        $combine = collect([]);
+        foreach ($products as $p){
+            $combine->push($p->category->name);
+        }
+
+        return $combine->unique()->combine($chunks);
     }
 
+    public function getCompatibles($id) :\Illuminate\Support\Collection
+    {
+        $product = Product::findOrFail($id, ['id', 'title', 'slug', 'price', 'category_id'])->compatibles;
+        $product->load('category');
+
+        $chunks = $product->chunkWhile(function ($value, $key, $chunk){
+            return $value->category->name === $chunk->last()->category->name;
+        });
+
+        $combine = collect([]);
+        foreach ($product as $p){
+            $combine->push($p->category->name);
+        }
+
+        return $combine->combine($chunks);
+    }
 
 
 }

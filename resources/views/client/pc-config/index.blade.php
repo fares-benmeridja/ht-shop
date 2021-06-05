@@ -3,14 +3,21 @@
 @section('title', 'ht_shop - Contact us!')
 
 @section('content')
-    <div class="form-group col-md">
-        <label for="processor">Processor</label>
-        <select class="form-control linked-select" name="processor" id="processor" data-target="" data-source="/product/id">
-            <option value="0" selected>Choose...</option>
-            @foreach($products['CPUs'] as $cpu)
-                <option value="{{ $cpu->id }}" {{ old('processor') == $cpu->id ? "selected" : '' }}>{{ "$cpu->title" }}</option>
-            @endforeach
-        </select>
+    <div class="container">
+        <div class="row">
+
+        @foreach($products as $categories)
+            <div class="form-group col-md-12 col-xl-6">
+                <img src="{{ asset('storage'.DIRECTORY_SEPARATOR.$categories->first()->category->image) }}" style="width: 50px; height: 50px; margin-right: 16px; object-fit: cover" alt="{{ $categories->first()->category->name }}"><label for="{{ $categories->first()->category->name }}" style="font-size: large">{{ $categories->first()->category->name }}s</label>
+                <select class="form-control multiple-linked-select" name="{{ $categories->first()->category->name }}" id="{{ $categories->first()->category->name }}" data-target="#" data-source="/product/id">
+                    <option value="0" selected>Choose...</option>
+                    @foreach($categories as $product)
+                        <option value="{{ $product->id }}" {{ old($product->category->name) == $product->id ? "selected" : '' }}>{{ "$product->title $product->formatedPrice" }}</option>
+                    @endforeach
+                </select>
+            </div>
+        @endforeach
+        </div>
     </div>
 {{--    <div class="form-group col-md" style="{{ old('daira_id', auth()->user()->daira_id ?? null) ?? "display: none" }}">--}}
 {{--        <label for="daira_id">Daira</label>--}}

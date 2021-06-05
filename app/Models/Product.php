@@ -68,14 +68,14 @@ class Product extends Model
     public function scopeLoadCategory()
     {
         return $this->load(['category' => function($query){
-            $query->select(['name', 'slug', 'id']);
+            $query->select(['name', 'slug', 'id', 'image']);
         }]);
     }
 
     public function scopeWithCategory($q)
     {
         return $q->with(['category' => function($query){
-            $query->select(['name', 'slug', 'id']);
+            $query->select(['name', 'slug', 'id', 'image']);
         }]);
     }
 
