@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'RedArt') }}</title>
+    <title>{{ config('app.name', 'ht_shop') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/master.css') }}" rel="stylesheet">
@@ -29,5 +29,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/master.js') }}"></script>
+    @yield('script')
 </body>
 </html>

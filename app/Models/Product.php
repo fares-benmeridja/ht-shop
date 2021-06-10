@@ -108,8 +108,7 @@ class Product extends Model
                 DB::table('categories')->where('name', 'HDD')->pluck('id')->first(),
                 DB::table('categories')->where('name', 'Boitier')->pluck('id')->first(),
                 DB::table('categories')->where('name', 'Network card')->pluck('id')->first(),
-            ]
-        );
+            ]);
     }
 
 

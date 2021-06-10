@@ -14071,7 +14071,7 @@ main .information .down a {
 }
 
 main .information a:before {
-  font-family: "FontAwesome";
+  font-family: "FontAwesome", serif;
   content: "\F138";
   display: inline-block;
   margin-right: 5px;
@@ -14251,10 +14251,9 @@ main .images .carousel-item img {
 }
 
 .choose-us .info p {
-  margin: 40px;
+  margin: 20px 40px 40px 40px;
   line-height: 2;
   font-size: 15px;
-  margin-top: 20px;
 }
 
 /*End Choose us*/
@@ -14389,7 +14388,7 @@ main .images .carousel-item img {
 }
 
 .footer .site-info a:before {
-  font-family: "FontAwesome";
+  font-family: "FontAwesome", serif;
   content: "\F138";
   display: inline-block;
   margin-right: 5px;

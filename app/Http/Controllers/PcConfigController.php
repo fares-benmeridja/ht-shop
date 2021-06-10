@@ -23,14 +23,14 @@ class PcConfigController extends Controller
      */
     public function index()
     {
-        $products = $this->configRepository->all();
-        return view('client.pc-config.index', compact('products'));
+//        $products = $this->configRepository->all();
+        return view('client.pc-config.index');
     }
 
     public function getJson($id)
     {
         $products = $this->configRepository->getCompatibles($id);
-        dd(response()->json($products));
+        dd($products, response()->json($products));
         return response()->json($products);
     }
 }

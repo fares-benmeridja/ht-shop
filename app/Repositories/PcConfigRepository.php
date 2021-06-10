@@ -8,9 +8,6 @@ use App\Models\Product;
 
 class PcConfigRepository extends ResourceRepository
 {
-
-
-
     protected $model;
 
     public function __construct(PcConfig $config)
@@ -23,7 +20,12 @@ class PcConfigRepository extends ResourceRepository
      */
     public function all() :\Illuminate\Support\Collection
     {
-        $products = Product::config()->withCategory()->published()->limit(200)->get(['id', 'title', 'slug', 'price', 'category_id']);
+        $products = Product::
+            config()
+            ->withCategory()
+            ->with('images')
+            ->limit(200)
+            ->get(['id', 'title', 'slug', 'price', 'online', 'qty_available', 'category_id']);
 
         $chunks = $products->chunkWhile(function ($value, $key, $chunk){
             return $value->category->name === $chunk->last()->category->name;
@@ -54,5 +56,25 @@ class PcConfigRepository extends ResourceRepository
         return $combine->combine($chunks);
     }
 
+    public function search(string $search)
+    {
+        $products = Product::where('title' , 'LIKE', "%{$search}%")
+            ->config()
+            ->withCategory()
+            ->limit(200)
+            ->get(['id', 'title', 'slug', 'price', 'online', 'qty_available', 'category_id']);
+
+        $chunks = $products->chunkWhile(function ($value, $key, $chunk){
+            return $value->category->name === $chunk->last()->category->name;
+        });
+
+        $combine = collect([]);
+        foreach ($products as $p){
+            $combine->push($p->category->name);
+        }
+
+        return $combine->unique()->combine($chunks);
+//        return Product::where('title', 'LIKE', "%{$search}%")->get();
+    }
 
 }

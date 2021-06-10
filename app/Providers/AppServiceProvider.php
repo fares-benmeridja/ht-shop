@@ -27,5 +27,15 @@ class AppServiceProvider extends ServiceProvider
     {
         view::share('wilayas' , \App\Models\Wilaya::pluck('name', 'id'));
         Paginator::useBootstrap();
+
+        \Illuminate\Support\Collection::macro('recursive', function () {
+            return $this->map(function ($value) {
+                if (is_array($value) || is_object($value)) {
+                    return collect($value)->recursive();
+                }
+
+                return $value;
+            });
+        });
     }
 }
