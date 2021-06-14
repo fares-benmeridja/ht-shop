@@ -11,7 +11,7 @@
         </div>
 
     <!-- Modal -->
-        <div id="category-{{ $loop->index }}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div wire:ignore.self id="category-{{ $loop->index }}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -36,6 +36,7 @@
                                     <th scope="col">Title</th>
                                     <th scope="col">Dispo</th>
                                     <th scope="col">Price</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -45,7 +46,7 @@
                                         $initLink = \Illuminate\Support\Str::replace("\\","/", asset('storage'.DIRECTORY_SEPARATOR.$products->first()->first_image) );
                                         $link = \Illuminate\Support\Str::replace("\\","/", asset('storage'.DIRECTORY_SEPARATOR.$product->first_image) );
                                     @endphp
-                                    <tr class="filter-tr" role="button" x-model="link" @mouseover="link = '{{ $link }}'" @mouseleave="link = '{{ $initLink }}'" wire:click="compatibles({{$product->id}})">
+                                    <tr class="filter-tr" x-on:mouseover="link = '{{ $link }}'" x-on:mouseleave="link = '{{ $initLink }}'">
                                         <th scope="row">{{ $loop->index }}</th>
                                         <td>{{ $product->title }}</td>
                                         @if($product->qty_available > 0)
@@ -54,6 +55,11 @@
                                             <td><i style="color: #00ad5f" class="fa fa-times-circl fa-lg" aria-hidden="true"></i></td>
                                         @endif
                                         <td>{{ $product->formatedPrice }}</td>
+                                        <td wire:click="setCompatibles({{ $product->id }}, {{ $loop->index }})">
+                                            <button type="button" class="btn btn-primary">
+                                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                            </button>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>

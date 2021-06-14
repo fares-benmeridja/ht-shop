@@ -41,8 +41,12 @@ class ProductController extends Controller
         if (Auth::user()->is_seller_admin){
             $products = Product::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->simplePaginate(self::PERPAGE);
         }else{
-            $products = Product::orderBy('created_at', 'DESC')->simplePaginate(self::PERPAGE);
+            $products = Product::orderBy('created_at', 'DESC')->where('category_id', 9)->simplePaginate(self::PERPAGE);
         }
+
+        $products->load(['category' => function($query){
+            $query->select(['name', 'id']);
+        }]);
 
         return view("admin.products.index", compact('products'));
     }

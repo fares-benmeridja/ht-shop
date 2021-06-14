@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Request;
 
 class UpdateProductRequest extends FormRequest
 {
@@ -23,10 +24,11 @@ class UpdateProductRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
             "title"         => ['bail', 'required', 'string', 'min:3', 'max:100'],
             "price"         => ['bail', 'required', 'integer', 'min:0'],
-            "quantity"      => ['bail', 'required', 'integer', 'min:1', 'max:9999'],
+            "qty_available" => ['bail', 'required', 'integer', 'min:1', 'max:9999'],
             "description"   => ['bail', 'required', 'string', 'min:3', 'max:999999'],
             "category_id"   => ['bail', 'required', "exists:categories,id"],
             'images'        => ['sometimes'],

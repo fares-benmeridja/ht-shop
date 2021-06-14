@@ -32,7 +32,7 @@ Route::get('/category/{category}', [App\Http\Controllers\ProductController::clas
 Route::get('/category/{slug}/product/{product}', [App\Http\Controllers\ProductController::class, 'shop'])->name('products.shop');
 
 Route::get('pc-configurator', [\App\Http\Controllers\PcConfigController::class, 'index'])->name('pc-config.index');
-Route::get('product/{id}', [\App\Http\Controllers\PcConfigController::class, 'getJson'])->name('pc-config.getjson');
+//Route::get('product/{id}', [\App\Http\Controllers\PcConfigController::class, 'getJson'])->name('pc-config.getjson');
 
 Route::middleware('auth')->group(function(){
 

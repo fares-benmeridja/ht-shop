@@ -8,36 +8,45 @@ use Livewire\Component;
 class PcConfig extends Component
 {
 
-    private $compatibles = [];
+    public int $compatibles = 0;
+    public int $listenerID = -1;
 
-    public $panier = [];
+    public $cart = [];
 
     private $fields = ['id', 'title', 'slug', 'price', 'online', 'qty_available', 'category_id'];
 
-    public function compatibles($id)
+    public function setCompatibles(int $id, int $listenerID)
     {
+        $this->compatibles = $id;
+        $this->listenerID = $listenerID;
+    }
 
-        $this->panier[] = Product::findOrFail($id, $this->fields);
+    private function compatibles()
+    {
+        $product = Product::findOrFail($this->compatibles, $this->fields);
 
-        $product = Product::findOrFail($id, $this->fields)->compatibles;
+        $compatibles = $product->compatibles;
+        $compatibles->load('category');
+
         $product->load('category');
+        $compatibles->prepend($product);
 
-        $chunks = $product->chunkWhile(function ($value, $key, $chunk){
+        $chunks = $compatibles->chunkWhile(function ($value, $key, $chunk){
             return $value->category->name === $chunk->last()->category->name;
         });
 
         $combine = collect([]);
-        foreach ($product as $p){
+        foreach ($compatibles as $p){
             $combine->push($p->category->name);
         }
-
-        $this->dispatchBrowserEvent('compatiblesConfig');
 
         return $combine->combine($chunks);
     }
 
     private function all()
     {
+        $this->reset('compatibles');
+
         $products = Product:: config()
             ->withCategory()
             ->with('images')
@@ -58,14 +67,10 @@ class PcConfig extends Component
 
     public function render()
     {
-
-        $collection = $this->compatibles === []
-            ? $this->all()
-            : $this->compatibles;
-
         return view('livewire.pc-config', [
-            'collection' => $collection,
+            'collection' => $this->compatibles === 0
+                ? $this->all()
+                : $this->compatibles()
         ]);
-
     }
 }

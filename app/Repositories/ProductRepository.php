@@ -53,7 +53,7 @@ class ProductRepository extends ResourceRepository
             }
 
             foreach ($inputs['images'] as $image){
-                $this->imageRepository->store(['product_id' => $model->id, "code" => $image]);
+                $this->imageRepository->store(['product_id' => $model->id, 'product' => $model, "code" => $image]);
             }
 
         }

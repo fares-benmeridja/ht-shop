@@ -17,6 +17,7 @@
                 <thead>
                 <tr>
                     <th>Article name</th>
+                    <th>Category</th>
                     <th>price</th>
                     <th>Created date</th>
                     <th></th>
@@ -26,6 +27,7 @@
                 @foreach($products as $product)
                 <tr class="tr-shadow">
                     <td>{{ $product->title }}</td>
+                    <td>{{ $product->category->name }}</td>
                     <td>{{ $product->formated_price }}</td>
                     <td>{{ $product->created_at }}</td>
                     <td>
