@@ -17,6 +17,10 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
 
     <script>
+        window.addEventListener('closeModal', event => {
+            $('.modal').modal('hide')
+        })
+
         function filterTable() {
 
             // Declare variables

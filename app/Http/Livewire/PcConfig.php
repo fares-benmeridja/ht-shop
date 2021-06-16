@@ -8,22 +8,30 @@ use Livewire\Component;
 class PcConfig extends Component
 {
 
-    public int $compatibles = 0;
-    public int $listenerID = -1;
+    public $selectedProducts = [];
+
+    public int $compatible = 0;
 
     public $cart = [];
 
+    public $combined;
+
     private $fields = ['id', 'title', 'slug', 'price', 'online', 'qty_available', 'category_id'];
 
-    public function setCompatibles(int $id, int $listenerID)
+    public function setCompatible(int $id)
     {
-        $this->compatibles = $id;
-        $this->listenerID = $listenerID;
+        $this->compatible = $id;
+        $product = Product::with('category')->findOrFail($id, $this->fields);
+
+        $this->selectedProducts[$product->category->name] = $id;
+
+//        $this->selectedProducts->push(Product::with('category')->findOrFail($id, $this->fields));
+        $this->dispatchBrowserEvent('closeModal');
     }
 
     private function compatibles()
     {
-        $product = Product::findOrFail($this->compatibles, $this->fields);
+        $product = Product::findOrFail($this->compatible, $this->fields);
 
         $compatibles = $product->compatibles;
         $compatibles->load('category');
@@ -31,46 +39,59 @@ class PcConfig extends Component
         $product->load('category');
         $compatibles->prepend($product);
 
-        $chunks = $compatibles->chunkWhile(function ($value, $key, $chunk){
-            return $value->category->name === $chunk->last()->category->name;
-        });
+        $sortedByCategory = $compatibles->sortBy('category_id')->groupBy('category_id');
 
-        $combine = collect([]);
-        foreach ($compatibles as $p){
-            $combine->push($p->category->name);
-        }
+//        $unionCollection = $this->combined->values()->union($this->getCombined($sortedByCategory)->unique()->values());
 
-        return $combine->combine($chunks);
+        // J'ai les categories filtré sans la categorie du produit selectioné
+
+        $result = $this->combined->combine($sortedByCategory);
+
+        foreach ($result as $key => $value)
+            foreach ($this->selectedProducts as $k => $selectedProduct)
+                if ($k === $key){
+                    unset($value[0]);
+                    $value->put(0, Product::with(['category', 'images'])->findOrFail($selectedProduct, $this->fields));
+                    break;
+                }
+
+        return $result;
     }
 
     private function all()
     {
-        $this->reset('compatibles');
+        $this->reset('compatible');
 
-        $products = Product:: config()
+        $products = Product::config()
             ->withCategory()
             ->with('images')
-            ->limit(200)
+            ->orderBy('category_id')
             ->get($this->fields);
 
-        $chunks = $products->chunkWhile(function ($value, $key, $chunk){
-            return $value->category->name === $chunk->last()->category->name;
-        });
+        $sortedByCategory = $products->sortBy('category_id')->groupBy('category_id');
 
-        $combine = collect([]);
-        foreach ($products as $p){
-            $combine->push($p->category->name);
-        }
+        $this->combined = $this->getCombined($sortedByCategory)->unique();
 
-        return $combine->unique()->combine($chunks);
+        return $this->combined->combine($sortedByCategory);
     }
 
     public function render()
     {
         return view('livewire.pc-config', [
-            'collection' => $this->compatibles === 0
+            'collection' => $this->compatible === 0
                 ? $this->all()
                 : $this->compatibles()
         ]);
+    }
+
+    private function getCombined($sorted)
+    {
+        $combine = collect([]);
+        foreach ($sorted as $chunk){
+            foreach ($chunk as $p)
+                $combine->push($p->category->name);
+        }
+
+        return $combine;
     }
 }

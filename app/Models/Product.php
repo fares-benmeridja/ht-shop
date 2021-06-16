@@ -11,7 +11,19 @@ class Product extends Model
 {
     use HasFactory;
 
-    const UNIT_PRICE = 'DZA';
+    private const UNIT_PRICE = 'DZA';
+
+    private array $configCategories = [
+        'Processor',
+        'Graphic card',
+        'RAM',
+        'Motherboard',
+        'Power supply unit',
+        'SSD',
+        'HDD',
+        'Boitier',
+        'Network card',
+    ];
 
     protected $fillable = ['slug', 'user_id', 'title', 'description', 'online', 'price', 'qty_available', 'category_id'];
 
@@ -96,19 +108,16 @@ class Product extends Model
         return $this->load('compatibles');
     }
 
-    public function scopeConfig($q)
+    public function scopeConfig($q, array $categories = [])
     {
-        return $q->whereIn('category_id', [
-                DB::table('categories')->where('name', 'Processor')->pluck('id')->first(),
-                DB::table('categories')->where('name', 'Graphic card')->pluck('id')->first(),
-                DB::table('categories')->where('name', 'RAM')->pluck('id')->first(),
-                DB::table('categories')->where('name', 'Motherboard')->pluck('id')->first(),
-                DB::table('categories')->where('name', 'Power supply unit')->pluck('id')->first(),
-                DB::table('categories')->where('name', 'SSD')->pluck('id')->first(),
-                DB::table('categories')->where('name', 'HDD')->pluck('id')->first(),
-                DB::table('categories')->where('name', 'Boitier')->pluck('id')->first(),
-                DB::table('categories')->where('name', 'Network card')->pluck('id')->first(),
-            ]);
+        if (! $categories)
+            $categories = $this->configCategories;
+
+        $queryTable = collect([]);
+        foreach ($categories as $category)
+            $queryTable->push(DB::table('categories')->where('name', "$category")->pluck('id')->first());
+
+        return $q->whereIn('category_id', $queryTable);
     }
 
 

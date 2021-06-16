@@ -1,23 +1,52 @@
 <div class="component">
-    @foreach($collection as $products)
-        <div class="card my-3">
-            <div type="button" data-toggle="modal" data-target="#category-{{ $loop->index }}" class="text-decoration-none d-flex justify-content-between m-4">
-                <div style="flex: 2">
-                    <img style="margin-right: 20px; border-radius: 50%; border: 1px solid gray; width: 50px; height: 50px; object-fit: cover" src="{{ asset('storage'.DIRECTORY_SEPARATOR.$products->first()->category->image) }}" alt="">
-                    <span style="font-size: 21px; font-family: Montserrat,sans-serif; color: #505050; text-transform: uppercase; font-weight: 400; margin: auto">{{ $products->first()->category->name }}</span>
+    @dump($collection, $selectedProducts)
+    @foreach($collection as $key => $products)
+        @if($products->count() > 1)
+            <div class="card my-3">
+                <div type="button" data-toggle="modal" data-target="#category-{{ $loop->index }}" class="text-decoration-none d-flex justify-content-between m-4">
+                    <div style="flex: 2">
+                        <img style="margin-right: 20px; border-radius: 50%; border: 1px solid gray; width: 50px; height: 50px; object-fit: cover" src="{{ asset('storage'.DIRECTORY_SEPARATOR.$products->first()->category->image) }}" alt="">
+                        <span style="font-size: 21px; font-family: Montserrat,sans-serif; color: #505050; text-transform: uppercase; font-weight: 400; margin: auto">{{ $products->first()->category->name }}</span>
+                    </div>
+                    <i class="fa fa-plus-circle fa-3x my-auto" aria-hidden="true"></i>
                 </div>
-                <i class="fa fa-plus-circle fa-3x my-auto" aria-hidden="true"></i>
             </div>
-        </div>
+        @elseif($products->count() === 0)
+            <div class="card mt-3">
+                <div style="" class="text-decoration-none d-flex justify-content-between m-4">
+                    <div style="flex: 2">
+                        <img style="margin-right: 20px; border-radius: 50%; border: 1px solid gray; width: 50px; height: 50px; object-fit: cover" src="{{ asset('storage'.DIRECTORY_SEPARATOR.$products->first()->category->image) }}" alt="">
+                        <span style="font-size: 21px; font-family: Montserrat,sans-serif; color: #505050; text-transform: uppercase; font-weight: 400; margin: auto">{{ $products->first()->category->name }}</span>
+                    </div>
+                </div>
+            </div>
+        @else
+            <div class="card mt-3">
+                <div style="" class="text-decoration-none d-flex justify-content-between m-4">
+                    <div style="flex: 2">
+                        <img style="margin-right: 20px; border-radius: 50%; border: 1px solid gray; width: 50px; height: 50px; object-fit: cover" src="{{ asset('storage'.DIRECTORY_SEPARATOR.$products->first()->category->image) }}" alt="">
+                        <span style="font-size: 21px; font-family: Montserrat,sans-serif; color: #505050; text-transform: uppercase; font-weight: 400; margin: auto">{{ $products->first()->category->name }}</span>
+                    </div>
+                </div>
+            </div>
 
-    <!-- Modal -->
+            <div class="card">
+                <div style="" class="text-decoration-none d-flex justify-content-between m-4">
+                    <div style="flex: 2">
+                        <img style="margin-right: 20px; border-radius: 50%; border: 1px solid gray; width: 50px; height: 50px; object-fit: cover" src="{{ asset('storage'.DIRECTORY_SEPARATOR.$products->first()->images->first()->code) }}" alt="">
+                        <span style="font-size: 21px; font-family: Montserrat,sans-serif; color: #505050; text-transform: uppercase; font-weight: 400; margin: auto">{{ $products->first()->category->name }}</span>
+                    </div>
+                </div>
+            </div>
+        @endif
+        <!-- Modal -->
         <div wire:ignore.self id="category-{{ $loop->index }}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <div style="width: 100%">
                             <img style="margin-right: 20px; border-radius: 50%; border: 1px solid gray; width: 50px; height: 50px; object-fit: cover" src="{{ asset('storage'.DIRECTORY_SEPARATOR.$products->first()->category->image) }}" alt="">
-                            <span style="font-size: 21px; font-family: Montserrat,sans-serif; color: #505050; text-transform: uppercase; font-weight: 400; margin: auto">{{ $products->first()->category->name }} ({{ $products->count() }})</span>
+                            <span style="font-size: 21px; font-family: Montserrat,sans-serif; color: #505050; text-transform: uppercase; font-weight: 400; margin: auto">{{ $key }} ({{ $products->count() }})</span>
                         </div>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -55,7 +84,7 @@
                                             <td><i style="color: #00ad5f" class="fa fa-times-circl fa-lg" aria-hidden="true"></i></td>
                                         @endif
                                         <td>{{ $product->formatedPrice }}</td>
-                                        <td wire:click="setCompatibles({{ $product->id }}, {{ $loop->index }})">
+                                        <td wire:click="setCompatible({{ $product->id }})">
                                             <button type="button" class="btn btn-primary">
                                                 <i class="fa fa-plus" aria-hidden="true"></i>
                                             </button>
