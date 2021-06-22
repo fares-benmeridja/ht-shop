@@ -14,6 +14,9 @@
                 <li class="nav-item ">
                     <a class="nav-link" href="{{ route('main') }}">Home</a>
                 </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ route('pc-config.index') }}">Pc configurator</a>
+                </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ route('main') }}#DownToAboutus">About us <span class="sr-only">(current)</span></a>
                 </li>

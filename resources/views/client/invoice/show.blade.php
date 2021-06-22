@@ -22,7 +22,7 @@
             <span>Email</span>{{ $order->user->email }}<br>
             <span>Date</span>{{ $order->created_at->format('d M Y') }}<br>
         </p>
-        <p id="company">ht-shop<br>+213 782 20 66 52<br><a>{{ env('EMAIL') }}</a><br>
+        <p id="company">ht-shop<br>+213 782 20 66 52<br><br>
     </div>
 
 </header>

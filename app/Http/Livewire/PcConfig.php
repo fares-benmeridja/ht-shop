@@ -3,6 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Models\Product;
+use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Arr;
 use Livewire\Component;
 
 class PcConfig extends Component
@@ -14,6 +16,8 @@ class PcConfig extends Component
 
     public $cart = [];
 
+    public int $amount = 0;
+
     public $combined;
 
     private $fields = ['id', 'title', 'slug', 'price', 'online', 'qty_available', 'category_id'];
@@ -21,9 +25,22 @@ class PcConfig extends Component
     public function setCompatible(int $id)
     {
         $this->compatible = $id;
-        $product = Product::with('category')->findOrFail($id, $this->fields);
+        $product = Product::with(['category', 'images'])->findOrFail($id, $this->fields);
 
         $this->selectedProducts[$product->category->name] = $id;
+
+        $this->cart[$id] =[
+                'image'     => $product->first_image,
+                'category'  => $product->category->name,
+                'cat_slug'  => $product->category->slug,
+                'product_slug' => $product->slug,
+                'title'     => $product->title,
+                "qty_dispo" => $product->qty_available,
+                "product_id" => $product->id,
+                'price'     => $product->price
+        ];
+
+        $this->amount();
 
 //        $this->selectedProducts->push(Product::with('category')->findOrFail($id, $this->fields));
         $this->dispatchBrowserEvent('closeModal');
@@ -75,10 +92,36 @@ class PcConfig extends Component
         return $this->combined->combine($sortedByCategory);
     }
 
+    public function unsetProduct($key)
+    {
+        if (Arr::has($this->selectedProducts, $key)){
+            unset($this->cart[$this->selectedProducts[$key]]);
+            unset($this->selectedProducts[$key]);
+        }
+    }
+
+    public function amount()
+    {
+        foreach ($this->cart as $product)
+            $this->amount += $product['price'];
+    }
+
+    public function cart()
+    {
+        foreach ($this->cart as $key => $product)
+        {
+            $price = $product['price'];
+            unset($product['price']);
+            Cart::add($key, $product['title'], 1, $price, $product);
+        }
+
+        return redirect()->route('cart.index');
+    }
+
     public function render()
     {
         return view('livewire.pc-config', [
-            'collection' => $this->compatible === 0
+            'collection' => $this->selectedProducts === []
                 ? $this->all()
                 : $this->compatibles()
         ]);
