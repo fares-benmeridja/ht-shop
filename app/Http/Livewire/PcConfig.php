@@ -97,11 +97,13 @@ class PcConfig extends Component
         if (Arr::has($this->selectedProducts, $key)){
             unset($this->cart[$this->selectedProducts[$key]]);
             unset($this->selectedProducts[$key]);
+            $this->amount();
         }
     }
 
     public function amount()
     {
+        $this->amount = 0;
         foreach ($this->cart as $product)
             $this->amount += $product['price'];
     }

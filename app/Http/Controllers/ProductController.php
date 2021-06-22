@@ -41,7 +41,7 @@ class ProductController extends Controller
         if (Auth::user()->is_seller_admin){
             $products = Product::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->simplePaginate(self::PERPAGE);
         }else{
-            $products = Product::orderBy('created_at', 'DESC')->where('category_id', 9)->simplePaginate(self::PERPAGE);
+            $products = Product::orderBy('created_at', 'DESC')->simplePaginate(self::PERPAGE);
         }
 
         $products->load(['category' => function($query){
@@ -174,9 +174,12 @@ class ProductController extends Controller
 
     }
 
-    public function all()
+    public function all(Request $request)
     {
-        $products = Product::whereBetween('category_id', [1,8])->orderBy('created_at', 'DESC')->published()->simplePaginate(self::CATEGORY_PERPAGE);
+        $products = empty($request->q)
+            ? Product::orderBy('created_at', 'DESC')->published()->simplePaginate(self::CATEGORY_PERPAGE)
+            : Product::orderBy('created_at', 'DESC')->published()->where('title', "LIKE", "%{$request->q}%")->simplePaginate(self::CATEGORY_PERPAGE);
+
         $products->load('category');
         $products->load("images");
         $title = "All catégories";
@@ -185,12 +188,13 @@ class ProductController extends Controller
     }
 
 
-    public function category(Category $category)
+    public function category(Category $category, Request $request)
     {
         $products = Product::where('category_id', $category->id)
-            ->published()
-            ->orderBy('created_at', 'DESC')
-            ->simplePaginate(self::CATEGORY_PERPAGE);
+                ->published()
+                ->orderBy('created_at', 'DESC')
+                ->simplePaginate(self::CATEGORY_PERPAGE);
+
 
         $products->load('images');
 

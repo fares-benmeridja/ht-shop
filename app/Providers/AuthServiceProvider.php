@@ -38,9 +38,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('view-invoice', function (User $user, Order $order){
-            return $user->is_main_admin || $user->is_editor_admin
-                ? true
-                : $user->id === $order->user_id;
+            return ( $user->is_main_admin || $user->is_editor_admin ) || $user->id === $order->user_id;
         });
 
         Gate::define("published", function (User $user){

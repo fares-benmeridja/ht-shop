@@ -187,4 +187,4 @@ function clearAlerts(){
     {
         alerts[i].parentNode.removeChild(alerts[i])
     }
-};
+}

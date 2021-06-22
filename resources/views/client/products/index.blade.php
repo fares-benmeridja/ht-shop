@@ -8,6 +8,10 @@
         <div class="container">
             <div class="articles-header">
                 <h2>{{ $title }}</h2>
+                <form action="{{ route('products.all') }}" method="get" class="form-inline my-2 my-lg-0">
+                    <input name="q" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                </form>
             </div>
             <div class="row">
                 @foreach($products as $product)

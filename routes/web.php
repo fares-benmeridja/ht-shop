@@ -33,6 +33,8 @@ Route::get('/category/{slug}/product/{product}', [App\Http\Controllers\ProductCo
 
 Route::get('pc-configurator', [\App\Http\Controllers\PcConfigController::class, 'index'])->name('pc-config.index');
 
+//Route::get('/all-categories/', [\App\Http\Controllers\ProductController::class, 'search'])->name("search");
+
 Route::middleware('auth')->group(function(){
 
     Route::get('/thankyou/{order}', \App\Http\Controllers\ThanksController::class)->name('thankyou');

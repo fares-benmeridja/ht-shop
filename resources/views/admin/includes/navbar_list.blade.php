@@ -9,10 +9,12 @@
             <i class="fas fa-inbox"></i>Inbox</a>
     </li>
 @endcan
+
 <li class="{{ request()->routeIs('products.*') ? 'active' : null }} has-sub">
     <a class="js-arrow" href="{{ route('products.index') }}">
         <i class="fas fa-clipboard-list"></i>Articles</a>
 </li>
+
 @can('view-orders')
     <li class="{{ request()->routeIs('orders.*') ? 'active' : null }} has-sub">
         <a class="js-arrow" href="{{ route('orders.index') }}">

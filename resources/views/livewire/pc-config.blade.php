@@ -23,7 +23,7 @@
                                     <a href="{{ route('products.shop', ["slug" => $key, "product" => $products->first()]) }}" target="_blank" style="text-decoration: none"> <span style="font-size: 21px; font-family: Montserrat,sans-serif; color: #505050; text-transform: uppercase; font-weight: 400; margin: auto">{{ $products->first()->title }}</span></a>
                                 </div>
                             </div>
-                            <i type="button" style="color: #e3342f" wire:click="unsetProduct('{{ $key }}')" class="fa fa-trash-o fa-2x my-auto" aria-hidden="true"></i>
+                            <i type="button" style="color: #e3342f" wire:key="unset-{{ $key }}" wire:click="unsetProduct('{{ $key }}')" class="fa fa-trash-o fa-2x my-auto" aria-hidden="true"></i>
                         </div>
                     </div>
                 @else

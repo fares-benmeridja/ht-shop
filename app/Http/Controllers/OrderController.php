@@ -65,7 +65,9 @@ class OrderController extends Controller
         $order->load(['user']);
         $order->loadProducts();
 
-        return view('admin.orders.show', compact('order'));
+        $count = $order->products()->count();
+
+        return view('admin.orders.show', compact('order', 'count'));
     }
 
 

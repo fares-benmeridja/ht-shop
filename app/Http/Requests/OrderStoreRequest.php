@@ -28,7 +28,7 @@ class OrderStoreRequest extends FormRequest
 //            'commune_id'    => ['bail', 'required', 'exists:communes,id'],
 //            'daira_id'      => ['bail', 'required', 'exists:dairas,id'],
 //            'wilaya_id'     => ['bail', 'required', 'exists:wilayas,id'],
-            'description'   => ['bail', 'nullable', 'max:9999'],
+//            'description'   => ['bail', 'nullable', 'max:9999'],
 //            'zip_code'      => ['bail', 'required', 'integer'],
             "address"       => ['bail', 'required', 'min:8', 'max:255'],
 

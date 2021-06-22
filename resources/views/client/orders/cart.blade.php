@@ -113,18 +113,18 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form id="payment-form" action="{{ route('orders.store') }}" class="form-sign-up" method="POST">
+                        <form id="checkout-form" action="{{ route('orders.store') }}" class="form-sign-up" method="POST">
                             @csrf
 
-                            <span id="card-errors" role="alert"></span>
                             <div class="form-row js-loader">
                                 <div class="form-group col-md-12">
-                                    <label class="required" for="address">Mailing address</label>
+                                    <label class="required" for="address">Full address</label>
                                     <input type="text" name="address" class="form-control" id="address" placeholder="Cité 124 logements">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div id="card-element" class="form-control"></div>
+                                <span id="card-errors" role="alert"></span>
                             </div>
 
                         <button class="btn btn-lg btn-primary btn-block" id="checkout-button" type="submit">Confirm</button>
@@ -140,6 +140,19 @@
 
 @section("script")
     <script>
+function clearErrors(form) {
+    let errorDiv = form.querySelectorAll('.invalid-feedback')
+    let input = form.querySelectorAll('.is-invalid')
+    const length = errorDiv.length
+
+    for (let i = 0; i < length; i++)
+    {
+        errorDiv[i].parentNode.removeChild(errorDiv[i])
+        input[i].classList.remove('is-invalid')
+    }
+}
+
+(function() {
         let stripe = Stripe("pk_test_51HNQBoLRQFhSf8lDkSqZ5koYTyhGcyh8MpIGuttnE9s5du5Kxcow1LZzwQtH6FoxCTP5H9Di9nJh4d6uVkIXL55K00674LylWN");
         let elements = stripe.elements({ locale: 'fr'});
 
@@ -172,58 +185,6 @@
             }
         });
 
-
-        let form = document.getElementById('payment-form');
-
-        form.addEventListener('submit', function(ev) {
-            ev.preventDefault();
-            document.getElementById("checkout-button").disabled = true;
-
-            stripe.confirmCardPayment("{{ $clientSecret }}", {
-                payment_method: {
-                    card: card
-                }
-            }).then(function(result) {
-                console.log(result)
-                if (result.error) {
-                    // Show error to your customer (e.g., insufficient funds)
-                    document.getElementById("checkout-button").disabled = false;
-                    console.log(result.error.message);
-                } else {
-                    // The payment has been processed!
-                    if (result.paymentIntent.status === 'succeeded') {
-                        let paymentIntent, token, form, url, successUrl, errorUrl;
-                        paymentIntent = result.paymentIntent;
-                        token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-                        form = document.getElementById('payment-form');
-                        url = form.action;
-                        successUrl = '/payment/success';
-                        errorUrl = '/payment/error';
-
-                        fetch(
-                            url,
-                            {
-                                headers: {
-                                    "Content-Type": "application/json",
-                                    "Accept": "application/json, text-plain, */*",
-                                    "X-Requested-With": "XMLHttpRequest",
-                                    "X-CSRF-TOKEN": token
-                                },
-                                method: 'post',
-                                body: JSON.stringify({
-                                    paymentIntent: paymentIntent
-                                })
-                            }).then((response)=> {
-                            if (response.ok)
-                                window.location.href = successUrl;
-                            else
-                                window.location.href = errorUrl;
-                        }).catch((error) => {
-                            console.log(error)
-                        })
-                    }
-                }
-            });
-        });
+})();
     </script>
 @endsection
