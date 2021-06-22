@@ -8,6 +8,8 @@ use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
+use Stripe\PaymentIntent;
+use Stripe\Stripe;
 
 class CartController extends Controller
 {
@@ -18,7 +20,18 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('client.orders.cart');
+
+        Stripe::setApiKey('sk_test_51HNQBoLRQFhSf8lDWYE8LKKvgsMH02sIpgGAPieB0zDpMbAI4yDFxxMn4mZLxzs1yYtW8fNhp8xE3cNUwGcJ6s5b00s2PM8cKb');
+        $paymentIntent = PaymentIntent::create([
+            'amount' => (int) Cart::total(),
+            'currency' => 'DZD',
+        ]);
+
+        $clientSecret = [
+            'clientSecret' => $paymentIntent->client_secret,
+        ];
+
+        return view('client.orders.cart', $clientSecret);
     }
 
     /**

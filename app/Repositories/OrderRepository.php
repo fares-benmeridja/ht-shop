@@ -38,8 +38,6 @@ class OrderRepository extends ResourceRepository
         }
     }
 
-
-
     public function syncDataTable()
     {
         $data = [];

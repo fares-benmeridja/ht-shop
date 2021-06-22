@@ -2,6 +2,10 @@
 
 @section('title', 'ht_shop - Shopping Cart')
 
+@section('stylesheet')
+    <script src="https://js.stripe.com/v3/"></script>
+@endsection
+
 @section('content')
     <!--Start panier-->
     <div class="shopping-cart px-4 px-lg-0">
@@ -35,10 +39,13 @@
 
                                 <tr class="js-cart-tr">
                                     <th scope="row" class="border-0">
-                                        <div class="p-2">
+                                        <div style="display:flex; justify-content:flex-start; align-content:center;">
                                             <img src="{{ asset('storage'.DIRECTORY_SEPARATOR.$cart->options->image) }}" alt="" width="70" class="img-fluid rounded shadow-sm">
-                                            <div class="ml-3 d-inline-block align-middle">
-                                                <h5 class="mb-0"><a href="{{ route('products.shop', ['slug' => $cart->options->cat_slug, 'product' => $cart->options->product_slug]) }}" class="text-dark d-inline-block align-middle">{{ $cart->options->title }}</a></h5><span class="text-muted font-weight-normal font-italic d-block">Category: {{ $cart->options->category }}</span>
+                                            <div class="align-middle" style="flex: auto">
+                                                <h5 class="mb-0 align-middle">
+                                                    <a href="{{ route('products.shop', ['slug' => $cart->options->cat_slug, 'product' => $cart->options->product_slug]) }}" class="text-dark d-inline-block align-middle">{{ $cart->options->title }}</a>
+                                                </h5>
+                                                <span class="text-muted font-weight-normal font-italic d-block">Category: {{ $cart->options->category }}</span>
                                             </div>
                                         </div>
                                     </th>
@@ -106,16 +113,21 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form id="checkout-form" action="{{ route('orders.store') }}" class="form-sign-up" method="POST">
+                        <form id="payment-form" action="{{ route('orders.store') }}" class="form-sign-up" method="POST">
                             @csrf
 
+                            <span id="card-errors" role="alert"></span>
                             <div class="form-row js-loader">
                                 <div class="form-group col-md-12">
                                     <label class="required" for="address">Mailing address</label>
                                     <input type="text" name="address" class="form-control" id="address" placeholder="Cité 124 logements">
                                 </div>
                             </div>
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">Confirm</button>
+                            <div class="form-group">
+                                <div id="card-element" class="form-control"></div>
+                            </div>
+
+                        <button class="btn btn-lg btn-primary btn-block" id="checkout-button" type="submit">Confirm</button>
                     </form>
                 </div>
             </div>
@@ -124,4 +136,94 @@
     <!--End Modal-->
 
     <!--End panier-->
+@endsection
+
+@section("script")
+    <script>
+        let stripe = Stripe("pk_test_51HNQBoLRQFhSf8lDkSqZ5koYTyhGcyh8MpIGuttnE9s5du5Kxcow1LZzwQtH6FoxCTP5H9Di9nJh4d6uVkIXL55K00674LylWN");
+        let elements = stripe.elements({ locale: 'fr'});
+
+        let style = {
+            base: {
+                color: "#32325d",
+                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                fontSmoothing: "antialiased",
+                fontSize: "16px",
+                "::placeholder": {
+                    color: "#aab7c4"
+                }
+            },
+            invalid: {
+                color: "#f00",
+                iconColor: "#f00"
+            }
+        };
+
+        let card = elements.create("card", { style: style });
+        card.mount("#card-element");
+
+        card.on('change', ({error}) => {
+            const displayError = document.getElementById('card-errors');
+            if (error) {
+                displayError.style.color = "#dc3545";
+                displayError.textContent = error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+
+
+        let form = document.getElementById('payment-form');
+
+        form.addEventListener('submit', function(ev) {
+            ev.preventDefault();
+            document.getElementById("checkout-button").disabled = true;
+
+            stripe.confirmCardPayment("{{ $clientSecret }}", {
+                payment_method: {
+                    card: card
+                }
+            }).then(function(result) {
+                console.log(result)
+                if (result.error) {
+                    // Show error to your customer (e.g., insufficient funds)
+                    document.getElementById("checkout-button").disabled = false;
+                    console.log(result.error.message);
+                } else {
+                    // The payment has been processed!
+                    if (result.paymentIntent.status === 'succeeded') {
+                        let paymentIntent, token, form, url, successUrl, errorUrl;
+                        paymentIntent = result.paymentIntent;
+                        token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                        form = document.getElementById('payment-form');
+                        url = form.action;
+                        successUrl = '/payment/success';
+                        errorUrl = '/payment/error';
+
+                        fetch(
+                            url,
+                            {
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    "Accept": "application/json, text-plain, */*",
+                                    "X-Requested-With": "XMLHttpRequest",
+                                    "X-CSRF-TOKEN": token
+                                },
+                                method: 'post',
+                                body: JSON.stringify({
+                                    paymentIntent: paymentIntent
+                                })
+                            }).then((response)=> {
+                            if (response.ok)
+                                window.location.href = successUrl;
+                            else
+                                window.location.href = errorUrl;
+                        }).catch((error) => {
+                            console.log(error)
+                        })
+                    }
+                }
+            });
+        });
+    </script>
 @endsection
