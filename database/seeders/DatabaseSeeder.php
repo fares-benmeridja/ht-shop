@@ -13,7 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
         $this->call([
 //            WilayaSeeder::class,
 //            DairaSeeder::class,
@@ -22,11 +21,13 @@ class DatabaseSeeder extends Seeder
 //            CategorySeeder::class,
 //            PcConfigCategorySeeder::class,
 
-//            PcConfigSeeder::class
+            PcConfigSeeder::class
         ]);
 
 //        \App\Models\User::factory(10)->create();
-//        \App\Models\Product::factory(300)->create();
-        \App\Models\Image::factory(1)->create();
+//        \App\Models\Product::factory(500)->create();
+//
+//        for ($i=0; $i < 2000; $i++)
+//            \App\Models\Image::factory()->create();
     }
 }

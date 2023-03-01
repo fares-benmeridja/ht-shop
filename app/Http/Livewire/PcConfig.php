@@ -60,8 +60,8 @@ class PcConfig extends Component
 
 //        $unionCollection = $this->combined->values()->union($this->getCombined($sortedByCategory)->unique()->values());
 
-        // J'ai les categories filtré sans la categorie du produit selectioné
-
+        // J'ai les categories filtré sans la catégorie du produit selectioné
+//        dd($this->combined, $sortedByCategory);
         $result = $this->combined->combine($sortedByCategory);
 
         foreach ($result as $key => $value)
@@ -75,7 +75,7 @@ class PcConfig extends Component
         return $result;
     }
 
-    private function all()
+    public function all()
     {
         $this->reset('compatible');
 

@@ -188,13 +188,12 @@ class ProductController extends Controller
     }
 
 
-    public function category(Category $category, Request $request)
+    public function category(Category $category)
     {
         $products = Product::where('category_id', $category->id)
                 ->published()
                 ->orderBy('created_at', 'DESC')
                 ->simplePaginate(self::CATEGORY_PERPAGE);
-
 
         $products->load('images');
 

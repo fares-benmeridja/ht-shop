@@ -25,28 +25,30 @@ class ImageFactory extends Factory
      */
     public function definition()
     {
+//        $categories = collect([
+//            'Laptops',
+//            "Printers & Scanners",
+//            "Desktop Computer parts",
+//            "Computers Accessories",
+//            "Network",
+//            "Desktop PCs",
+//            "Laptop parts",
+//            "External storage",
+//            "Processor",
+//            "Graphic card",
+//            "RAM",
+//            "SSD",
+//            "HDD",
+//            "Motherboard",
+//            "Power supply unit",
+//            "Boitier",
+//            "Network card"
+//        ]);
 
-        $category = collect(
-            [
-                'Laptops',
-                "Printers & Scanners",
-                "Desktop Computer parts",
-                "Computers Accessories",
-                "Network",
-                "Desktop PCs",
-                "Laptop parts",
-                "External storage",
-                "Processor",
-                "Graphic card",
-                "RAM",
-                "SSD",
-                "HDD",
-                "Motherboard",
-                "Power supply unit",
-                "Boitier",
-                "Network card"
-            ]
-        )->random();
+
+//            $category = $categories->random();
+
+//            $categories->forget($categories->search($category));
 
         $file = [
             'Laptops'                   => 'laptops',
@@ -68,12 +70,21 @@ class ImageFactory extends Factory
             "Network card"              => "network-card"
         ];
 
+        $product = Product::withCount('images')
+            ->having('images_count', '<', '4')
+            ->first();
+
+        $category = $product->category->name;
         $name = $file[$category].DIRECTORY_SEPARATOR.$this->faker->numberBetween(1,4);
 
         $content = __DIR__.DIRECTORY_SEPARATOR.self::PATH.DIRECTORY_SEPARATOR."$name.jpg";
 
         $format = 'y/m/d';
-        $product = Product::whereHas('category', fn($q) => $q->where('name', $category))->has('images', '<=', '4')->inRandomOrder()->first(['id', 'slug']);
+//            $product = Product::whereHas('category', function ($q) use ($category) {
+//                return $q->where('name', $category);
+//            })->withCount('images')->having('images_count', '<=', '4')->get(['id', 'slug'])->limit(1);
+
+
         $path = Storage::disk('public')->putFile(self::PATH.DIRECTORY_SEPARATOR.$file[$category].DIRECTORY_SEPARATOR.now()->format($format).DIRECTORY_SEPARATOR."$product->slug", $content);
 
         return [

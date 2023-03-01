@@ -25,6 +25,7 @@ class ProductFactory extends Factory
     public function definition()
     {
         $title = $this->faker->jobTitle;
+        $category_id = Category::inRandomOrder()->pluck('id')->first();
 
         return [
             'title' => $title,
